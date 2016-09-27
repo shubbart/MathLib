@@ -3,8 +3,7 @@
 #include "Test.h"
 #include "vec2.h"
 #include "vec3.h"
-#include <cmath>
-
+#include "flops.h"
 
 int main()
 {
@@ -61,6 +60,16 @@ int main()
 	var1 += vec2{ -2,1 };
 	assert((var1 != vec2{ 1,6 }));
 
+	assert((fromAngle(0) == vec2{ 1,0 }));
+	assert((fromAngle(deg2rad(90)) == vec2{ 0,1 }));
+
+	assert(fequals(angleBetween(vec2{ 0,1 }, vec2{ 0,1 }),
+		deg2rad(0)));
+	assert(fequals(angleBetween(vec2{ 1,1 }, vec2{ 0,1 }),
+		deg2rad(45)));
+	assert(fequals(angleBetween(vec2{ 1,1 }, vec2{ 0,1 }),
+		angle(vec2{ 1,1 })));
+
 	//assert((magnitude(vec2{ 2, 2}) == sqrt(8)));
 
 	//////////////////////////////////////
@@ -91,7 +100,9 @@ int main()
 
 	//assert((magnitude(vec3{2,2,2}) == sqrt(12)));
 
+	assert((crossProd(vec3{ 1,0,0 }, vec3{ 0,1,0 })
+									== vec3{ 0,0,1 }));
+
 	getchar();
 	return 0;
 }
-
