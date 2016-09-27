@@ -3,6 +3,7 @@
 #include "Test.h"
 #include "vec2.h"
 #include "vec3.h"
+#include <cmath>
 
 
 int main()
@@ -60,7 +61,7 @@ int main()
 	var1 += vec2{ -2,1 };
 	assert((var1 != vec2{ 1,6 }));
 
-	//assert(magnitude(vec2{ 10,10 }) == );
+	//assert((magnitude(vec2{ 2, 2}) == sqrt(8)));
 
 	//////////////////////////////////////
 	// Vector3 Tests
@@ -88,7 +89,7 @@ int main()
 	var3 += vec3{ -2,1,5 };
 	assert((var3 != vec3{ 1,6,33 }));
 
-	//assert(magnitude(vec2{ 10,10 }) == );
+	//assert((magnitude(vec3{2,2,2}) == sqrt(12)));
 
 	getchar();
 	return 0;
