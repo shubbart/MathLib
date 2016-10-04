@@ -18,7 +18,7 @@ void Transform::debugDraw()
 {
 	//sfw::drawCircle(position.x, position.y, 30);
 
-	sfw::drawCircle(position.x, position.y, 30, 12U, BLUE);
+	/*sfw::drawCircle(position.x, position.y, 30, 12U, BLUE);
 	sfw::drawCircle(position.x, position.y, 28, 12U, BLUE);
 	sfw::drawCircle(position.x, position.y, 26, 12U, BLUE);
 	sfw::drawCircle(position.x, position.y, 24, 12U, BLUE);
@@ -32,7 +32,7 @@ void Transform::debugDraw()
 	sfw::drawCircle(position.x, position.y, 8, 12U, MAGENTA);
 	sfw::drawCircle(position.x, position.y, 6, 12U, YELLOW);
 	sfw::drawCircle(position.x, position.y, 4, 12U, YELLOW);
-	sfw::drawCircle(position.x, position.y, 2, 12U, YELLOW);
+	sfw::drawCircle(position.x, position.y, 2, 12U, YELLOW);*/
 
 	//vec2 dirEnd = position + getDirection()* scale.x;
 	//vec2 upEnd = position - perp(getDirection()) * scale.y;

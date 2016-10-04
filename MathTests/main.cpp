@@ -103,6 +103,23 @@ int main()
 	assert((crossProd(vec3{ 1,0,0 }, vec3{ 0,1,0 })
 									== vec3{ 0,0,1 }));
 
+
+	assert(fequals(lerp(.23, 124, 0), .23));
+	assert(fequals(lerp(.23, 124, 1), 124));
+	assert(fequals(lerp(1, 1, 1), 1));
+
+	assert(fequals(quadBezier(0, 0, 1, 0), 0));
+	assert(fequals(quadBezier(0, 0, 1, 1), 1));
+
+	assert(fequals(HermiteSpline(15, 40, 21, 10, 0), 15));
+	assert(fequals(HermiteSpline(15, 40, 21, 10, 1), 21));
+
+	assert(fequals(cardinalSpline(15, 40, 21, .2f, 0), 15));
+	assert(fequals(cardinalSpline(15, 40, 21, .1f, 1), 21));
+
+	assert(fequals(catRomSpline(15, 40, 21, 0), 15));
+	assert(fequals(catRomSpline(15, 40, 21, 1), 21));
+
 	getchar();
 	return 0;
 }

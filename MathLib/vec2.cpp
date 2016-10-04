@@ -108,3 +108,43 @@ vec2 fromAngle(float a)
 {
 	return vec2{ cos(a), sin(a) };
 }
+
+vec2 lerp(const vec2 &start, const vec2 &end, float alpha)
+{
+	vec2 retval;
+	retval.x = lerp(start.x, end.x, alpha);
+	retval.y = lerp(start.y, end.y, alpha);
+	return retval; 
+}
+
+vec2 quadBezier(const vec2 &start, const vec2 &mid, const vec2 &end, float alpha)
+{
+	vec2 retval;
+	retval.x = quadBezier(start.x, mid.x, end.x, alpha);
+	retval.y = quadBezier(start.y, mid.y, end.y, alpha);
+	return retval;
+}
+
+vec2 HermiteSpline(const vec2 &start, const vec2 &s_tan, const vec2 &end, const vec2 &e_tan, float alpha)
+{
+	vec2 retval;
+	retval.x = HermiteSpline(start.x, s_tan.x, end.x, e_tan.x, alpha);
+	retval.y = HermiteSpline(start.y, s_tan.y, end.y, e_tan.y, alpha);
+	return retval;
+}
+
+vec2 cardinalSpline(const vec2 &start, const vec2 &mid, const vec2 &end, float tightness, float alpha)
+{
+	vec2 retval;
+	retval.x = cardinalSpline(start.x, mid.x, end.x, tightness, alpha);
+	retval.y = cardinalSpline(start.y, mid.y, end.y, tightness, alpha);
+	return retval;
+}
+
+vec2 catRomSpline(const vec2 &start, const vec2 &mid, const vec2 &end, float alpha)
+{
+	vec2 retval;
+	retval.x = cardinalSpline(start.x, mid.x, end.x, .5f, alpha);
+	retval.y = cardinalSpline(start.y, mid.y, end.y, .5f, alpha);
+	return retval;
+}

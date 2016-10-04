@@ -18,7 +18,7 @@ quad_results quad(float a, float b, float c);
 
 
 // problem c.
-float lerp(float start, float end, float t);
+//float lerp(float start, float end, float t);
 
 // problem d.
 struct Point { float x, y; };
