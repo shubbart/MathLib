@@ -125,6 +125,14 @@ vec2 quadBezier(const vec2 &start, const vec2 &mid, const vec2 &end, float alpha
 	return retval;
 }
 
+vec2 cubicBezier(vec2 &start, vec2 &mid1, vec2 &mid2, vec2 &end, float alpha)
+{
+	vec2 retval;
+	retval.x = cubicBezier(start.x, mid1.x, mid2.x, end.x, alpha);
+	retval.y = cubicBezier(start.y, mid1.y, mid2.y, end.y, alpha);
+	return retval;
+}
+
 vec2 HermiteSpline(const vec2 &start, const vec2 &s_tan, const vec2 &end, const vec2 &e_tan, float alpha)
 {
 	vec2 retval;

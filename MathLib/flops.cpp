@@ -72,6 +72,12 @@ float quadBezier(float start, float mid, float end, float alpha)
 	return lerp(lerp(start, mid, alpha), lerp(mid, end, alpha), alpha);
 }
 
+float cubicBezier(float start, float mid1, float mid2, float end, float alpha)
+{
+	return (1-alpha)*(1 - alpha)*(1 - alpha)*start + 3*(1-alpha)*(1 - alpha)*alpha*mid1 +
+			3*(1-alpha)*alpha*alpha*mid2 + alpha*alpha*alpha*end;
+}
+
 float HermiteSpline(float start, float s_tan, float end, float e_tan, float alpha)
 {
 	float alphaSq = alpha*alpha;

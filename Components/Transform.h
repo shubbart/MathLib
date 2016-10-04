@@ -11,6 +11,8 @@ public:
 	vec2  scale;
 	float facing;
 
+	//void func(float param1 = 0.0f, float param2);
+
 	vec2 getDirection();
 	void setDirection(const vec2 &dir);
 
