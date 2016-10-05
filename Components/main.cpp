@@ -50,6 +50,7 @@ void main()
 		playerRigidbody.update(playerTransform, deltaTime);
 
 		playerTransform.debugDraw();
+		//w00t
 		
 	}
 
