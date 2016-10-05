@@ -13,8 +13,8 @@
 
 void main()
 {
-	int SCREEN_WIDTH = 800;
-	int SCREEN_HEIGHT = 800;
+	int SCREEN_WIDTH = 1200;
+	int SCREEN_HEIGHT = 1200;
 	sfw::initContext(SCREEN_WIDTH, SCREEN_HEIGHT);
 	sfw::setBackgroundColor(BLACK);
 	//float steps = 100;
@@ -25,7 +25,7 @@ void main()
 		mid2 = { 980, 200 };
 
 	Transform playerTransform(400, 400);
-	playerTransform.scale = { 5,5 };
+	playerTransform.scale = { 30,30 };
 
 	Rigidbody playerRigidbody;
 	SpaceshipController playerCtrl;
@@ -46,8 +46,8 @@ void main()
 			playerTransform.position.y = SCREEN_HEIGHT;
 
 		playerCtrl.update(playerLoco);
-		playerLoco.update(playerRigidbody, deltaTime);
-		playerRigidbody.update(playerTransform, deltaTime);
+		playerLoco.update(playerTransform, playerRigidbody);
+		playerRigidbody.integrate(playerTransform, deltaTime);
 
 		playerTransform.debugDraw();
 		//w00t

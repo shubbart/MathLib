@@ -9,35 +9,25 @@ SpaceshipLocomotion::SpaceshipLocomotion()
 	vertThrust = 0.0f;
 	horzThrust = 0.0f;
 
-	speed = 7000.0f;
+	breakPower = 1.0f;
+	turnSpeed = 2.0f;
+	speed = 100.0f;
 	maxSpeed = 10000.0f;
 }
 
-void SpaceshipLocomotion::doThrust(float value)
+void SpaceshipLocomotion::doThrust(float value) {vertThrust += value;}
+
+void SpaceshipLocomotion::doTurn(float value) {horzThrust += value;}
+
+void SpaceshipLocomotion::doStop(float value) {stopAction += value;}
+
+void SpaceshipLocomotion::update(Transform &trans, Rigidbody &rigidbody)
 {
-	vertThrust = value;
-}
+	rigidbody.addForce(trans.getDirection() * speed * vertThrust);
+	rigidbody.addTorque(turnSpeed * horzThrust);
 
-void SpaceshipLocomotion::doTurn(float value)
-{
-	horzThrust = value;
-}
+	rigidbody.addForce(-rigidbody.velocity * breakPower * stopAction);
+	rigidbody.addTorque(-rigidbody.angularVelocity * breakPower * stopAction);
 
-void SpaceshipLocomotion::update(Rigidbody & rigidbody, float deltaTime)
-{
-	//poll for input
-	//apply the values to my rigidbody
-	rigidbody.acceleration.x = horzThrust * speed * deltaTime;
-	rigidbody.acceleration.y = vertThrust * speed * deltaTime;
-
-	if (magnitude(rigidbody.velocity) > maxSpeed)
-	{
-		vec2 dir = normal(rigidbody.velocity);
-		rigidbody.velocity = dir * maxSpeed;
-	}
-	//zero out the thrust values
-
-	vertThrust = 0.0f;
-	horzThrust = 0.0f;
-
+	horzThrust = vertThrust = stopAction = 0;
 }
