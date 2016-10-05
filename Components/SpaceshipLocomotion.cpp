@@ -10,9 +10,9 @@ SpaceshipLocomotion::SpaceshipLocomotion()
 	horzThrust = 0.0f;
 
 	breakPower = 1.0f;
-	turnSpeed = 2.0f;
-	speed = 100.0f;
-	maxSpeed = 10000.0f;
+	turnSpeed = 2.5f;
+	speed = 125.0f;
+	maxSpeed = 300.0f;
 }
 
 void SpaceshipLocomotion::doThrust(float value) {vertThrust += value;}
