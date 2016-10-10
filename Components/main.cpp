@@ -31,12 +31,12 @@ void main()
 	SpaceshipController playerCtrl;
 	SpaceshipLocomotion playerLoco;
 
-	Transform player2Transform(1100, 600);
+	/*Transform player2Transform(1100, 600);
 	player2Transform.scale = { 30,30 };
 
 	Rigidbody player2Rigidbody;
 	SpaceshipController player2Ctrl('J', 'L', 'I', 'K', 'M');
-	SpaceshipLocomotion player2Loco;
+	SpaceshipLocomotion player2Loco;*/
 	
 	while (sfw::stepContext())
 	{
@@ -59,7 +59,7 @@ void main()
 		playerTransform.debugDraw();
 		playerRigidbody.debugDraw(playerTransform);
 
-		if (player2Transform.position.x > SCREEN_WIDTH)
+		/*if (player2Transform.position.x > SCREEN_WIDTH)
 			player2Transform.position.x = 0.0f;
 		else if (player2Transform.position.x < 0.0f)
 			player2Transform.position.x = SCREEN_WIDTH;
@@ -74,7 +74,7 @@ void main()
 		player2Rigidbody.integrate(player2Transform, deltaTime);
 
 		player2Transform.debugDraw();
-		player2Rigidbody.debugDraw(player2Transform);
+		player2Rigidbody.debugDraw(player2Transform);*/
 	}
 
 	sfw::termContext();
