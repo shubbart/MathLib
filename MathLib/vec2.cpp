@@ -156,3 +156,13 @@ vec2 catRomSpline(const vec2 &start, const vec2 &mid, const vec2 &end, float alp
 	retval.y = cardinalSpline(start.y, mid.y, end.y, .5f, alpha);
 	return retval;
 }
+
+float vec2::operator[](unsigned idx) const
+{
+	return v[idx];
+}
+
+float & vec2::operator[](unsigned idx)
+{
+	return v[idx];
+}
