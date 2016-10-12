@@ -2,6 +2,17 @@
 #include <cmath>
 #include "flops.h"
 
+float vec3::operator[](unsigned idx) const
+{
+	return v[idx];
+}
+
+float & vec3::operator[](unsigned idx)
+{
+	return v[idx];
+}
+
+
 vec3 operator+(const vec3 & lhs, const vec3 & rhs)
 {
 	return vec3{ lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z };
@@ -82,14 +93,14 @@ vec3 normal(const vec3 & v)
 	return retval;
 }
 
-float dot(const vec3 & lhs, const vec3 & rhs)
+float dotProd(const vec3 & lhs, const vec3 & rhs)
 {
 	return lhs.x * rhs.x + lhs.y * rhs.y + lhs.z * rhs.z;
 }
 
 float angleBetween(const vec3 & lhs, const vec3 & rhs)
 {
-	return acos(dot(normal(lhs), normal(rhs)));
+	return acos(dotProd(normal(lhs), normal(rhs)));
 }
 
 vec3 crossProd(const vec3 & lhs, const vec3 & rhs)

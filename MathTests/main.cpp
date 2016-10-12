@@ -4,6 +4,8 @@
 #include "vec2.h"
 #include "vec3.h"
 #include "flops.h"
+#include "mat2.h"
+#include "mat3.h"
 
 int main()
 {
@@ -119,6 +121,64 @@ int main()
 
 	assert(fequals(catRomSpline(15, 40, 21, 0), 15));
 	assert(fequals(catRomSpline(15, 40, 21, 1), 21));
+
+	//////////////////////////////////////////////////////////
+	//////// Matrix Tests
+
+	mat2 m0 = mat2{ 0,0,0,0 };
+	mat2 mI = mat2Identity();
+	mat2 t0 = mat2{ 4,3,2,1 };
+	vec2 v0 = vec2{ 1,0 };
+	assert(m0 == m0);
+	assert(mI * 2 == 2 * mI);
+	assert((mI * 2 == mat2{ 2,0,0,2 }));
+	assert(mI + m0 == mI);
+	assert(mI - mI == m0);
+	assert(mI*-1 == -mI);
+
+	assert(mI * mI == mI);
+	assert((mat2{ 1,2,3,4 }) * mI == (mat2{ 1,2,3,4 }));
+
+	assert(mI * v0 == v0);
+	assert((t0 * v0 == vec2{ 4,2 }));
+
+	mat2 test1 = mat2{1,2,3,4};
+	assert(determinant(test1) == -2);
+
+	assert(transpose(mI) == mI);
+	assert(inverse(mI) == mI);
+
+	assert(t0*inverse(t0) == mI);
+
+	mat3 M0 = { 0,0,0,0,0,0,0,0,0 };
+	mat3 MI = mat3Identity();
+	mat3 T0 = mat3{ 9,8,7,6,5,4,3,2,1 };
+	vec3 V0 = vec3{ 1,1,1 };
+
+	assert(M0 == M0);
+	assert(MI * 2 == 2 * MI);
+	assert(MI + M0 == MI);
+	assert(MI - MI == M0);
+	assert(MI*-1 == -MI);
+
+	assert(transpose(MI) == MI);
+	assert(inverse(MI) == MI);
+
+	assert(MI * MI == MI);
+	assert((mat3{ 1,2,3,4,5,6,7,8,9 }) * MI == (mat3{ 1,2,3,4,5,6,7,8,9 }));
+
+	mat3 Test1 = mat3{ 1,2,3,4,5,6,7,8,9 };
+	assert(determinant(Test1) == 0);
+
+	assert(MI * V0 == V0);
+	assert((T0 * V0 == vec3{ 24,15,6 }));
+
+	vec3 j = { 2,5,1 };
+	assert((scale(5, 1) * j == vec3{ 10,5,1 }));
+
+	assert((translate(0, 3) * j == vec3{ 2,8,1 }));
+
+	assert((rotate(deg2rad(90)) * j == vec3{ -5,2,1 }));
 
 	getchar();
 	return 0;

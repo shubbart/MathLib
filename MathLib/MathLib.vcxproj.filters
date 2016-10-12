@@ -47,5 +47,11 @@
     <ClCompile Include="flops.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="mat2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="mat3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
