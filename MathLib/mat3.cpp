@@ -213,8 +213,8 @@ mat3 scale(float w, float h)
 mat3 translate(float x, float y)
 {
 	mat3 retval = mat3Identity();
-	retval[2][0] = x;
-	retval[2][1] = y;
+	retval[0][2] = x;
+	retval[1][2] = y;
 
 
 	return retval;
@@ -222,6 +222,7 @@ mat3 translate(float x, float y)
 
 mat3 rotate(float a)
 {
+
 	vec2 d = fromAngle(a);
 	mat3 retval = mat3Identity();
 

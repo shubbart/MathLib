@@ -180,6 +180,14 @@ int main()
 
 	assert((rotate(deg2rad(90)) * j == vec3{ -5,2,1 }));
 
+	mat3 S = scale(2, 1);
+	mat3 T = translate(4, 3);
+	mat3 R = rotate(deg2rad(90));
+
+	mat3 RES = { 0,-1,0, 2,0,0, 4,3,1 };
+
+	assert((T*S*R == RES));
+
 	getchar();
 	return 0;
 }

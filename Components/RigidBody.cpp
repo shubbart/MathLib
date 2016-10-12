@@ -26,14 +26,14 @@ void Rigidbody::integrate(Transform &trans, float deltaTime)
 {
 	acceleration = force / mass;
 	velocity += acceleration * deltaTime + impulse / mass;
-	trans.position += velocity * deltaTime;
+	trans.m_position += velocity * deltaTime;
 	force = impulse = { 0,0 };
 
 	force = -velocity * drag;
 
 	angularAcceleration = torque / mass;
 	angularVelocity += angularAcceleration * deltaTime;
-	trans.facing += angularVelocity * deltaTime;
+	trans.m_facing += angularVelocity * deltaTime;
 	torque = 0;
 	torque = -angularVelocity * angularDrag;
 }

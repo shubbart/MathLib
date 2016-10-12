@@ -25,7 +25,7 @@ void main()
 		mid2 = { 980, 200 };
 
 	Transform playerTransform(100, 600);
-	playerTransform.scale = { 30,30 };
+	playerTransform.m_scale = { 30,30 };
 
 	Rigidbody playerRigidbody;
 	SpaceshipController playerCtrl;
@@ -37,20 +37,20 @@ void main()
 	Rigidbody player2Rigidbody;
 	SpaceshipController player2Ctrl('J', 'L', 'I', 'K', 'M');
 	SpaceshipLocomotion player2Loco;*/
-	
+
 	while (sfw::stepContext())
 	{
 		float deltaTime = sfw::getDeltaTime();
 
-		if (playerTransform.position.x > SCREEN_WIDTH)
-			playerTransform.position.x = 0.0f;
-		else if (playerTransform.position.x < 0.0f)
-			playerTransform.position.x = SCREEN_WIDTH;
+		if (playerTransform.m_position.x > SCREEN_WIDTH)
+			playerTransform.m_position.x = 0.0f;
+		else if (playerTransform.m_position.x < 0.0f)
+			playerTransform.m_position.x = SCREEN_WIDTH;
 
-		if (playerTransform.position.y > SCREEN_HEIGHT)
-			playerTransform.position.y = 0.0f;
-		else if (playerTransform.position.y < 0.0f)
-			playerTransform.position.y = SCREEN_HEIGHT;
+		if (playerTransform.m_position.y > SCREEN_HEIGHT)
+			playerTransform.m_position.y = 0.0f;
+		else if (playerTransform.m_position.y < 0.0f)
+			playerTransform.m_position.y = SCREEN_HEIGHT;
 
 		playerCtrl.update(playerLoco);
 		playerLoco.update(playerTransform, playerRigidbody);
@@ -59,15 +59,15 @@ void main()
 		playerTransform.debugDraw();
 		playerRigidbody.debugDraw(playerTransform);
 
-		/*if (player2Transform.position.x > SCREEN_WIDTH)
-			player2Transform.position.x = 0.0f;
-		else if (player2Transform.position.x < 0.0f)
-			player2Transform.position.x = SCREEN_WIDTH;
+		/*if (player2Transform.m_position.x > SCREEN_WIDTH)
+			player2Transform.m_position.x = 0.0f;
+		else if (player2Transform.m_position.x < 0.0f)
+			player2Transform.m_position.x = SCREEN_WIDTH;
 
-		if (player2Transform.position.y > SCREEN_HEIGHT)
-			player2Transform.position.y = 0.0f;
-		else if (player2Transform.position.y < 0.0f)
-			player2Transform.position.y = SCREEN_HEIGHT;
+		if (player2Transform.m_position.y > SCREEN_HEIGHT)
+			player2Transform.m_position.y = 0.0f;
+		else if (player2Transform.m_position.y < 0.0f)
+			player2Transform.m_position.y = SCREEN_HEIGHT;
 
 		player2Ctrl.update(player2Loco);
 		player2Loco.update(player2Transform, player2Rigidbody);
