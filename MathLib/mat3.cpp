@@ -127,9 +127,8 @@ vec3 operator*(const mat3 & A, const vec3 & V)
 	vec3 retval;
 	mat3 retA = transpose(A);
 
-	retval.x = dotProd(A.c[0], V);
-	retval.y = dotProd(A.c[1], V);
-	retval.z = dotProd(A.c[2], V);
+	for (int i = 0; i < 3; ++i)
+		retval[i] = dotProd(retA[i], V);
 
 	return retval;
 }
@@ -205,29 +204,35 @@ mat3 scale(float w, float h)
 	mat3 retval = mat3Identity();
 	retval[0][0] = w;
 	retval[1][1] = h;
-
 	return retval;
-
 }
 
 mat3 translate(float x, float y)
 {
 	mat3 retval = mat3Identity();
-	retval[0][2] = x;
-	retval[1][2] = y;
-
-
+	retval[2][0] = x;
+	retval[2][1] = y;
 	return retval;
 }
 
 mat3 rotate(float a)
 {
-
 	vec2 d = fromAngle(a);
 	mat3 retval = mat3Identity();
-
 	retval[0].xy = d;
 	retval[1].xy = -perp(d);
+
+	if (fequals(retval.mm[0][0], roundf(retval.mm[0][0])))
+		retval.mm[0][0] = roundf(retval.mm[0][0]);
+
+	if (fequals(retval.mm[0][1], roundf(retval.mm[0][1])))
+		retval.mm[0][1] = roundf(retval.mm[0][1]);
+
+	if (fequals(retval.mm[1][0], roundf(retval.mm[1][0])))
+		retval.mm[1][0] = roundf(retval.mm[1][0]);
+
+	if (fequals(retval.mm[1][1], roundf(retval.mm[1][1])))
+		retval.mm[1][1] = roundf(retval.mm[1][1]);
 
 	return retval;
 }

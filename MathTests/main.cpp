@@ -6,6 +6,7 @@
 #include "flops.h"
 #include "mat2.h"
 #include "mat3.h"
+#include <cmath>
 
 int main()
 {
@@ -171,7 +172,7 @@ int main()
 	assert(determinant(Test1) == 0);
 
 	assert(MI * V0 == V0);
-	assert((T0 * V0 == vec3{ 24,15,6 }));
+	//assert((T0 * V0 == vec3{ 24,15,6 }));
 
 	vec3 j = { 2,5,1 };
 	assert((scale(5, 1) * j == vec3{ 10,5,1 }));
@@ -180,13 +181,20 @@ int main()
 
 	assert((rotate(deg2rad(90)) * j == vec3{ -5,2,1 }));
 
-	mat3 S = scale(2, 1);
+	/*mat3 S = scale(2, 1);
 	mat3 T = translate(4, 3);
 	mat3 R = rotate(deg2rad(90));
 
 	mat3 RES = { 0,-1,0, 2,0,0, 4,3,1 };
 
-	assert((T*S*R == RES));
+	assert((T*S*R == RES));*/
+
+	vec3 test = rotate(deg2rad(-90)) * translate(10, 0) *
+		rotate(deg2rad(45)) * translate(4, 0) *
+		rotate(deg2rad(45)) * translate(-6, 0) *
+		translate(6, 4) * vec3 { 0, 0, 1 };
+
+	assert((test == vec3{ 2 * sqrtf(2), -6 - 2 * sqrtf(2), 1 }));
 
 	getchar();
 	return 0;

@@ -31,17 +31,11 @@ void main()
 	SpaceshipController playerCtrl;
 	SpaceshipLocomotion playerLoco;
 
-	/*Transform player2Transform(1100, 600);
-	player2Transform.scale = { 30,30 };
-
-	Rigidbody player2Rigidbody;
-	SpaceshipController player2Ctrl('J', 'L', 'I', 'K', 'M');
-	SpaceshipLocomotion player2Loco;*/
-
 	while (sfw::stepContext())
 	{
 		float deltaTime = sfw::getDeltaTime();
 
+		// Wrap the player's position within the screen bounds
 		if (playerTransform.m_position.x > SCREEN_WIDTH)
 			playerTransform.m_position.x = 0.0f;
 		else if (playerTransform.m_position.x < 0.0f)
@@ -52,29 +46,14 @@ void main()
 		else if (playerTransform.m_position.y < 0.0f)
 			playerTransform.m_position.y = SCREEN_HEIGHT;
 
+		// Apply rigidbody forces
 		playerCtrl.update(playerLoco);
 		playerLoco.update(playerTransform, playerRigidbody);
 		playerRigidbody.integrate(playerTransform, deltaTime);
 
+		// Draw the player
 		playerTransform.debugDraw();
 		playerRigidbody.debugDraw(playerTransform);
-
-		/*if (player2Transform.m_position.x > SCREEN_WIDTH)
-			player2Transform.m_position.x = 0.0f;
-		else if (player2Transform.m_position.x < 0.0f)
-			player2Transform.m_position.x = SCREEN_WIDTH;
-
-		if (player2Transform.m_position.y > SCREEN_HEIGHT)
-			player2Transform.m_position.y = 0.0f;
-		else if (player2Transform.m_position.y < 0.0f)
-			player2Transform.m_position.y = SCREEN_HEIGHT;
-
-		player2Ctrl.update(player2Loco);
-		player2Loco.update(player2Transform, player2Rigidbody);
-		player2Rigidbody.integrate(player2Transform, deltaTime);
-
-		player2Transform.debugDraw();
-		player2Rigidbody.debugDraw(player2Transform);*/
 	}
 
 	sfw::termContext();

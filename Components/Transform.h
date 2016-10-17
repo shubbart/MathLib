@@ -14,7 +14,8 @@ public:
 
 	//void func(float param1 = 0.0f, float param2);
 
-	vec2 getDirection();
+	vec2 Transform::getUp() const;
+	vec2 getDirection() const;
 	void setDirection(const vec2 &dir);
 
 	mat3 getLocalTransform() const;
