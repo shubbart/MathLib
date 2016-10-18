@@ -153,42 +153,6 @@ float determinant(const mat3 & A)
 mat3 inverse(const mat3 & A)
 {
 
-	/*mat3 value;
-	
-	value.m[0] = (A.m[4] * A.m[8]) - (A.m[5] * A.m[7]);
-	value.m[1] = (A.m[3] * A.m[8]) - (A.m[5] * A.m[6]);
-	value.m[2] = (A.m[3] * A.m[7]) - (A.m[4] * A.m[6]);
-	value.m[3] = (A.m[1] * A.m[8]) - (A.m[2] * A.m[7]);
-	value.m[4] = (A.m[0] * A.m[8]) - (A.m[2] * A.m[6]);
-	value.m[5] = (A.m[0] * A.m[7]) - (A.m[1] * A.m[6]);
-	value.m[6] = (A.m[1] * A.m[5]) - (A.m[2] * A.m[4]);
-	value.m[7] = (A.m[0] * A.m[5]) - (A.m[2] * A.m[3]);
-	value.m[8] = (A.m[0] * A.m[4]) - (A.m[1] * A.m[3]);
-
-	value.m[1] = -value.m[1];
-	value.m[3] = -value.m[3];
-	value.m[5] = -value.m[5];
-	value.m[7] = -value.m[7];
-
-	
-	//mat3 adjugate = transpose(value);
-	float detA = 1 / determinant(A);
-
-	fequals(value.m[0], detA);
-	fequals(value.m[1], detA);
-	fequals(value.m[2], detA);
-	fequals(value.m[3], detA);
-	fequals(value.m[4], detA);
-	fequals(value.m[5], detA);
-	fequals(value.m[6], detA);
-	fequals(value.m[7], detA);
-	fequals(value.m[8], detA);
-	
-	return transpose(value) * detA;
-	//return adjugate * detA;*/
-
-////////////////////////////////////////////////////////////////////////////////////////	
-
 	mat3 retval;
 
 	retval[0] = crossProd(A[1], A[2]);
@@ -222,7 +186,7 @@ mat3 rotate(float a)
 	retval[0].xy = d;
 	retval[1].xy = -perp(d);
 
-	if (fequals(retval.mm[0][0], roundf(retval.mm[0][0])))
+	/*if (fequals(retval.mm[0][0], roundf(retval.mm[0][0])))
 		retval.mm[0][0] = roundf(retval.mm[0][0]);
 
 	if (fequals(retval.mm[0][1], roundf(retval.mm[0][1])))
@@ -232,7 +196,7 @@ mat3 rotate(float a)
 		retval.mm[1][0] = roundf(retval.mm[1][0]);
 
 	if (fequals(retval.mm[1][1], roundf(retval.mm[1][1])))
-		retval.mm[1][1] = roundf(retval.mm[1][1]);
+		retval.mm[1][1] = roundf(retval.mm[1][1]);*/
 
 	return retval;
 }

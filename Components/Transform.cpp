@@ -57,14 +57,13 @@ void Transform::debugDraw(const mat3 &T) const
 	vec3 right = L * vec3{ 1, 0,   1 };
 	vec3 up = L * vec3{ 0, 1,   1 };
 
-	sfw::drawLine(pos.x, pos.y, right.x, right.y, RED);
+	/*sfw::drawLine(pos.x, pos.y, right.x, right.y, RED);
 	sfw::drawLine(pos.x, pos.y, up.x, up.y, GREEN);
-	sfw::drawLine(sgp.x, sgp.y, pos.x, pos.y, 0x888888FF);
+	sfw::drawLine(sgp.x, sgp.y, pos.x, pos.y, 0x888888FF);*/
 
-	//sfw::drawCircle(pos.x, pos.y, 30, 12, BLUE);
+	//sfw::drawCircle(pos.x, pos.y, m_scale.x, 12, BLUE);
 
-
-	sfw::drawCircle(pos.x, pos.y, 30, 12U, BLUE);
+	/*sfw::drawCircle(pos.x, pos.y, 30, 12U, BLUE);
 	sfw::drawCircle(pos.x, pos.y, 28, 12U, BLUE);
 	sfw::drawCircle(pos.x, pos.y, 26, 12U, BLUE);
 	sfw::drawCircle(pos.x, pos.y, 24, 12U, BLUE);
@@ -78,5 +77,5 @@ void Transform::debugDraw(const mat3 &T) const
 	sfw::drawCircle(pos.x, pos.y, 8, 12U, MAGENTA);
 	sfw::drawCircle(pos.x, pos.y, 6, 12U, YELLOW);
 	sfw::drawCircle(pos.x, pos.y, 4, 12U, YELLOW);
-	sfw::drawCircle(pos.x, pos.y, 2, 12U, YELLOW);
+	sfw::drawCircle(pos.x, pos.y, 2, 12U, YELLOW);*/
 }
