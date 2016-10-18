@@ -187,7 +187,7 @@ int main()
 
 	mat3 RES = { 0,-1,0, 2,0,0, 4,3,1 };
 
-	assert((T*S*R == RES));*/
+	assert((T*R*S == RES));*/
 
 	vec3 test = rotate(deg2rad(-90)) * translate(10, 0) *
 		rotate(deg2rad(45)) * translate(4, 0) *
