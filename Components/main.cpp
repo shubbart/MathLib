@@ -12,6 +12,8 @@
 #include "SpaceshipController.h"
 #include "PlanetaryMotor.h"
 #include "PlanetaryRenderer.h"
+#include "SpaceshipRenderer.h"
+#include "Camera.h"
 
 void main()
 {
@@ -27,20 +29,21 @@ void main()
 		mid2 = { 980, 200 };
 
 	Transform playerTransform(600, 600);
-	Transform ST1(-2, -8);
-	Transform ST2(-2, 5);
-	Transform ST3(8, 3);
+	//Transform ST1(-2, -8);
+	//Transform ST2(-2, 5);
+	//Transform ST3(8, 3);
 
 
 
 
-	playerTransform.m_scale = { 30, 30 };
+	playerTransform.m_scale = { 5, 5 };
 
 	Rigidbody playerRigidbody;
 	SpaceshipController playerCtrl;
 	SpaceshipLocomotion playerLoco;
+	SpaceshipRenderer playerRenderer(BLUE, 30);
 
-	ST1.m_parent = &playerTransform;
+	/*ST1.m_parent = &playerTransform;
 	ST2.m_parent = &ST1;
 	ST3.m_parent = &ST2;
 
@@ -59,7 +62,7 @@ void main()
 	SC2.CTR_RIGHT = 'K';
 	SC2.CTR_UP = 'NULL';
 	SC2.CTR_DOWN = 'NULL';
-	SpaceshipLocomotion SL2;
+	SpaceshipLocomotion SL2;*/
 	//////////////////////////////////////////////////////////////////
 	Transform sunTransform;
 	sunTransform.m_position = vec2{ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 };
@@ -68,25 +71,25 @@ void main()
 	sunMotor.m_rotationSpeed = 1;
 	PlanetaryRenderer sunRenderer(YELLOW, 100);
 	//////////////////////////////////////////////////////////////////
-	Transform arturoPlanetTransform;
-	arturoPlanetTransform.m_position = vec2{ -300, -175 };
-	arturoPlanetTransform.m_parent = &sunTransform;
-	Rigidbody arturoPlanetRbody;
-	PlanetaryMotor arturoPlanetMotor;
-	arturoPlanetMotor.m_rotationSpeed = -3;
-	PlanetaryRenderer arturoPlanetRenderer(RED, 50);
+	Transform Planet1Transform;
+	Planet1Transform.m_position = vec2{ -300, -175 };
+	Planet1Transform.m_parent = &sunTransform;
+	Rigidbody Planet1Rbody;
+	PlanetaryMotor Planet1Motor;
+	Planet1Motor.m_rotationSpeed = -3;
+	PlanetaryRenderer Planet1Renderer(RED, 50);
 
-	Transform arturomoonTransform;
-	arturomoonTransform.m_position = vec2{ 75, 0 };
-	arturomoonTransform.m_scale.x = 10;
-	arturomoonTransform.m_parent = &arturoPlanetTransform;
-	PlanetaryRenderer arturoMoonRenderer(WHITE, 5);
+	Transform P1MoonTransform;
+	P1MoonTransform.m_position = vec2{ 75, 0 };
+	P1MoonTransform.m_scale.x = 10;
+	P1MoonTransform.m_parent = &Planet1Transform;
+	PlanetaryRenderer P1MoonRenderer(WHITE, 5);
 
-	Transform arturomoon2Transform;
-	arturomoon2Transform.m_position = vec2{ -120, 75 };
-	arturomoonTransform.m_scale = vec2{ 10, 10 };
-	arturomoon2Transform.m_parent = &arturoPlanetTransform;
-	PlanetaryRenderer arturoMoon2Renderer(WHITE, 8);
+	Transform P1Moon2Transform;
+	P1Moon2Transform.m_position = vec2{ -120, 75 };
+	P1MoonTransform.m_scale = vec2{ 10, 10 };
+	P1Moon2Transform.m_parent = &Planet1Transform;
+	PlanetaryRenderer P1Moon2Renderer(WHITE, 8);
 	//////////////////////////////////////////////////////////////////
 	Transform Planet2Transform;
 	Planet2Transform.m_position = vec2{ -150, 110 };
@@ -102,7 +105,7 @@ void main()
 	PlanetaryRenderer P2MoonRenderer(WHITE, 10);
 	//////////////////////////////////////////////////////////////////
 	Transform Planet3Transform;
-	Planet3Transform.m_position = vec2{-400, 200 };
+	Planet3Transform.m_position = vec2{ -400, 200 };
 	Planet3Transform.m_parent = &sunTransform;
 	Rigidbody Planet3Rbody;
 	PlanetaryMotor Planet3Motor;
@@ -115,7 +118,7 @@ void main()
 	PlanetaryRenderer P3MoonRenderer(WHITE, 12);
 
 	Transform P3Moon2Transform;
-	P3Moon2Transform.m_position = vec2{-100, 75 };
+	P3Moon2Transform.m_position = vec2{ -100, 75 };
 	P3Moon2Transform.m_parent = &Planet3Transform;
 	PlanetaryRenderer P3Moon2Renderer(WHITE, 7);
 	//////////////////////////////////////////////////////////////////
@@ -144,16 +147,35 @@ void main()
 	P5MoonTransform.m_position = vec2{ 50, 50 };
 	P5MoonTransform.m_parent = &Planet5Transform;
 	PlanetaryRenderer P5MoonRenderer(WHITE, 5);
+	//////////////////////////////////////////////////////////////////
 
+	/*vec2 WP[] = { { 12, -8 }, { 15,8 }, { 5,8 }, { -22, -5 }, { 4, -2 }, { -6, 9 }, { 18, 88 }, { -22, -90 } };
 
-	
+	mat3 RES = translate(12, -8) * rotate(deg2rad(80));
+
+	for (int i = 0; i < 8; ++i)
+	{
+		vec2 D = WP[i + 1] - WP[i];
+
+		float currentAngle = atan2f(RES[0].y, RES[0].x);
+		float targetAngle = atan2f(D.y, D.x);
+		float distance = magnitude(D);
+
+		mat3 R = rotate(targetAngle - currentAngle);
+		mat3 T = translate(distance, 0);
+		
+		RES = T * R * RES;
+	}*/
+
+	//Camera camera;
+	Transform cameraTransform;
 
 	while (sfw::stepContext())
 	{
 		float deltaTime = sfw::getDeltaTime();
 
 		// Wrap the player's position within the screen bounds
-		if (playerTransform.m_position.x > SCREEN_WIDTH)
+		/*if (playerTransform.m_position.x > SCREEN_WIDTH)
 			playerTransform.m_position.x = 0.0f;
 		else if (playerTransform.m_position.x < 0.0f)
 			playerTransform.m_position.x = SCREEN_WIDTH;
@@ -161,7 +183,24 @@ void main()
 		if (playerTransform.m_position.y > SCREEN_HEIGHT)
 			playerTransform.m_position.y = 0.0f;
 		else if (playerTransform.m_position.y < 0.0f)
-			playerTransform.m_position.y = SCREEN_HEIGHT;
+			playerTransform.m_position.y = SCREEN_HEIGHT;*/
+
+
+		// CAMERA
+		cameraTransform.m_position
+			= lerp(cameraTransform.m_position,
+				playerTransform.getGlobalPosition(),
+				sfw::getDeltaTime() * 10);
+
+		// translation is the position of the camera ON THE SCREEN
+		// the scale describes the zoom
+		mat3 proj = translate(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2) * scale(2, 2);
+		mat3 view = inverse(cameraTransform.getGlobalTransform());
+		
+		mat3 camera = proj * view;
+
+
+
 
 		// Apply rigidbody forces
 		playerCtrl.update(playerLoco);
@@ -169,10 +208,10 @@ void main()
 		playerRigidbody.integrate(playerTransform, deltaTime);
 
 		// Draw the player
-		playerTransform.debugDraw();
-		playerRigidbody.debugDraw(playerTransform);
+		playerRenderer.shipDraw(playerTransform, camera);
+		//playerRigidbody.debugDraw(playerTransform);
 
-		ST1.debugDraw();
+		/*ST1.debugDraw();
 		SC1.update(SL1);
 		SL1.update(ST1, SRB1);
 		SRB1.integrate(ST1, deltaTime);
@@ -182,20 +221,26 @@ void main()
 		SL2.update(ST2, SRB2);
 		SRB2.integrate(ST2, deltaTime);
 		
-		ST3.debugDraw();
+		ST3.debugDraw();*/
 
+	
 		sunMotor.update(sunRbody);
 		sunRbody.integrate(sunTransform, deltaTime);
-		sunRenderer.draw(sunTransform);
-		//////////////////////////////////////////////////////////////////
-		arturoPlanetMotor.update(arturoPlanetRbody);
-		arturoPlanetRbody.integrate(arturoPlanetTransform, deltaTime);
-		arturoPlanetRenderer.draw(arturoPlanetTransform);
+		sunRenderer.draw(sunTransform, camera);
 
-		arturoMoonRenderer.draw(arturomoonTransform);
-		arturoMoon2Renderer.draw(arturomoon2Transform);
 		//////////////////////////////////////////////////////////////////
-		Planet2Motor.update(Planet2Rbody);
+
+		Planet1Motor.update(Planet1Rbody);
+		Planet1Rbody.integrate(Planet1Transform, deltaTime);
+		Planet1Renderer.draw(Planet1Transform, camera);
+		
+		P1MoonRenderer.draw(P1MoonTransform, camera);
+		P1Moon2Renderer.draw(P1Moon2Transform, camera);
+
+		//P1MoonTransform.debugDraw(camera);
+		//P1Moon2Transform.debugDraw(camera);
+		//////////////////////////////////////////////////////////////////
+		/*Planet2Motor.update(Planet2Rbody);
 		Planet2Rbody.integrate(Planet2Transform, deltaTime);
 		Planet2Renderer.draw(Planet2Transform);
 		
@@ -218,8 +263,10 @@ void main()
 		Planet5Rbody.integrate(Planet5Transform, deltaTime);
 		Planet5Renderer.draw(Planet5Transform);
 
-		P5MoonRenderer.draw(P5MoonTransform);
+		P5MoonRenderer.draw(P5MoonTransform);*/
 		//////////////////////////////////////////////////////////////////
+
+
 	}
 
 	sfw::termContext();

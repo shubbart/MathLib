@@ -9,6 +9,6 @@ public:
 	unsigned int color;
 	float size;
 
-	void draw(Transform &planetTrans);
+	void draw(Transform &planetTrans, const mat3 &camera);
 
 };

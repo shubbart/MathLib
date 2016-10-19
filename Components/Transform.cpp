@@ -29,6 +29,27 @@ void Transform::setDirection(const vec2 & dir)
 	m_facing = angle(dir);
 }
 
+vec2 Transform::getGlobalPosition() const
+{
+	return getGlobalTransform()[2].xy;
+}
+
+vec2 Transform::getGlobalRight() const
+{
+	return getGlobalTransform()[0].xy;
+}
+
+vec2 Transform::getGlobalUp() const
+{
+	return getGlobalTransform()[1].xy;
+}
+
+float Transform::getGlobalAngle() const
+{
+	//atan2f(y,x)
+	return angle(getGlobalRight());
+}
+
 mat3 Transform::getGlobalTransform() const
 {
 	if (m_parent == nullptr)
@@ -46,22 +67,27 @@ mat3 Transform::getLocalTransform() const
 	return T * R * S;
 }
 
+mat3 Transform::camera()
+{
+	return mat3();
+}
+
 void Transform::debugDraw(const mat3 &T) const
 {
 
-	mat3 L = T * getGlobalTransform();
+	/*mat3 L = T * getGlobalTransform();
 
 	vec3 pos = L[2];
-	vec3 sgp = m_parent ? m_parent->getGlobalTransform()[2] : pos;
+	vec3 sgp = m_parent ? T * m_parent->getGlobalTransform()[2] : pos;
 
 	vec3 right = L * vec3{ 1, 0,   1 };
 	vec3 up = L * vec3{ 0, 1,   1 };
 
-	/*sfw::drawLine(pos.x, pos.y, right.x, right.y, RED);
-	sfw::drawLine(pos.x, pos.y, up.x, up.y, GREEN);
-	sfw::drawLine(sgp.x, sgp.y, pos.x, pos.y, 0x888888FF);*/
+	sfw::drawLine(pos.x, pos.y, right.x, right.y, RED);
+	//sfw::drawLine(pos.x, pos.y, up.x, up.y, GREEN);
+	//sfw::drawLine(sgp.x, sgp.y, pos.x, pos.y, 0x888888FF);
 
-	//sfw::drawCircle(pos.x, pos.y, m_scale.x, 12, BLUE);
+	sfw::drawCircle(pos.x, pos.y, 20, 12, WHITE);*/
 
 	/*sfw::drawCircle(pos.x, pos.y, 30, 12U, BLUE);
 	sfw::drawCircle(pos.x, pos.y, 28, 12U, BLUE);

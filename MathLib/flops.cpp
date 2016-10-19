@@ -62,7 +62,7 @@ float rQuad(float x)
 // if alpha is 1, we want to return the end
 float lerp(float start, float end, float alpha)
 {
-	return (1 - alpha) * start + alpha * end; // avoids some issues with floating point error
+		return (1-alpha)*start + (alpha)*end; // avoids some issues with floating point error
 
 	// return alpha*(end - start) + start; //linear form, where alpha is x
 }

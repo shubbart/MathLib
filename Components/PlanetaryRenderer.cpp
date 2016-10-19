@@ -7,11 +7,11 @@ PlanetaryRenderer::PlanetaryRenderer(unsigned a_color, float a_size)
 	size = a_size;
 }
 
-void PlanetaryRenderer::draw(Transform & planetTrans)
+void PlanetaryRenderer::draw(Transform & planetTrans, const mat3 &camera)
 {
-	mat3 glob = planetTrans.getGlobalTransform();
+	mat3 L = camera * planetTrans.getGlobalTransform();
 
-	vec2 pos = glob[2].xy;
-
+	vec3 pos = L[2];
+	
 	sfw::drawCircle(pos.x, pos.y, size, 12U, color);
 }
