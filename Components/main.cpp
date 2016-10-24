@@ -41,7 +41,7 @@ void main()
 	Rigidbody playerRigidbody;
 	SpaceshipController playerCtrl;
 	SpaceshipLocomotion playerLoco;
-	SpaceshipRenderer playerRenderer(BLUE, 30);
+	SpaceshipRenderer playerRenderer(192192192, 30);
 
 	/*ST1.m_parent = &playerTransform;
 	ST2.m_parent = &ST1;
@@ -72,7 +72,7 @@ void main()
 	PlanetaryRenderer sunRenderer(YELLOW, 100);
 	//////////////////////////////////////////////////////////////////
 	Transform Planet1Transform;
-	Planet1Transform.m_position = vec2{ -300, -175 };
+	Planet1Transform.m_position = vec2{ -500, -175 };
 	Planet1Transform.m_parent = &sunTransform;
 	Rigidbody Planet1Rbody;
 	PlanetaryMotor Planet1Motor;
@@ -92,7 +92,7 @@ void main()
 	PlanetaryRenderer P1Moon2Renderer(WHITE, 8);
 	//////////////////////////////////////////////////////////////////
 	Transform Planet2Transform;
-	Planet2Transform.m_position = vec2{ -150, 110 };
+	Planet2Transform.m_position = vec2{ -300, 110 };
 	Planet2Transform.m_parent = &sunTransform;
 	Rigidbody Planet2Rbody;
 	PlanetaryMotor Planet2Motor;
@@ -105,7 +105,7 @@ void main()
 	PlanetaryRenderer P2MoonRenderer(WHITE, 10);
 	//////////////////////////////////////////////////////////////////
 	Transform Planet3Transform;
-	Planet3Transform.m_position = vec2{ -400, 200 };
+	Planet3Transform.m_position = vec2{ -850, -200 };
 	Planet3Transform.m_parent = &sunTransform;
 	Rigidbody Planet3Rbody;
 	PlanetaryMotor Planet3Motor;
@@ -123,7 +123,7 @@ void main()
 	PlanetaryRenderer P3Moon2Renderer(WHITE, 7);
 	//////////////////////////////////////////////////////////////////
 	Transform Planet4Transform;
-	Planet4Transform.m_position = vec2{ 175, -110 };
+	Planet4Transform.m_position = vec2{ 150, -110 };
 	Planet4Transform.m_parent = &sunTransform;
 	Rigidbody Planet4Rbody;
 	PlanetaryMotor Planet4Motor;
@@ -136,7 +136,7 @@ void main()
 	PlanetaryRenderer P4MoonRenderer(WHITE, 3);
 	//////////////////////////////////////////////////////////////////
 	Transform Planet5Transform;
-	Planet5Transform.m_position = vec2{ 300, 410 };
+	Planet5Transform.m_position = vec2{ 1100, 410 };
 	Planet5Transform.m_parent = &sunTransform;
 	Rigidbody Planet5Rbody;
 	PlanetaryMotor Planet5Motor;
@@ -147,27 +147,7 @@ void main()
 	P5MoonTransform.m_position = vec2{ 50, 50 };
 	P5MoonTransform.m_parent = &Planet5Transform;
 	PlanetaryRenderer P5MoonRenderer(WHITE, 5);
-	//////////////////////////////////////////////////////////////////
 
-	/*vec2 WP[] = { { 12, -8 }, { 15,8 }, { 5,8 }, { -22, -5 }, { 4, -2 }, { -6, 9 }, { 18, 88 }, { -22, -90 } };
-
-	mat3 RES = translate(12, -8) * rotate(deg2rad(80));
-
-	for (int i = 0; i < 8; ++i)
-	{
-		vec2 D = WP[i + 1] - WP[i];
-
-		float currentAngle = atan2f(RES[0].y, RES[0].x);
-		float targetAngle = atan2f(D.y, D.x);
-		float distance = magnitude(D);
-
-		mat3 R = rotate(targetAngle - currentAngle);
-		mat3 T = translate(distance, 0);
-		
-		RES = T * R * RES;
-	}*/
-
-	//Camera camera;
 	Transform cameraTransform;
 
 	while (sfw::stepContext())
@@ -237,33 +217,31 @@ void main()
 		P1MoonRenderer.draw(P1MoonTransform, camera);
 		P1Moon2Renderer.draw(P1Moon2Transform, camera);
 
-		//P1MoonTransform.debugDraw(camera);
-		//P1Moon2Transform.debugDraw(camera);
 		//////////////////////////////////////////////////////////////////
-		/*Planet2Motor.update(Planet2Rbody);
+		Planet2Motor.update(Planet2Rbody);
 		Planet2Rbody.integrate(Planet2Transform, deltaTime);
-		Planet2Renderer.draw(Planet2Transform);
+		Planet2Renderer.draw(Planet2Transform, camera);
 		
-		P2MoonRenderer.draw(P2MoonTransform);
+		P2MoonRenderer.draw(P2MoonTransform, camera);
 		//////////////////////////////////////////////////////////////////
 		Planet3Motor.update(Planet3Rbody);
 		Planet3Rbody.integrate(Planet3Transform, deltaTime);
-		Planet3Renderer.draw(Planet3Transform);
+		Planet3Renderer.draw(Planet3Transform, camera);
 
-		P3MoonRenderer.draw(P3MoonTransform);
-		P3MoonRenderer.draw(P3Moon2Transform);
+		P3MoonRenderer.draw(P3MoonTransform, camera);
+		P3MoonRenderer.draw(P3Moon2Transform, camera);
 		//////////////////////////////////////////////////////////////////
 		Planet4Motor.update(Planet4Rbody);
 		Planet4Rbody.integrate(Planet4Transform, deltaTime);
-		Planet4Renderer.draw(Planet4Transform);
+		Planet4Renderer.draw(Planet4Transform, camera);
 
-		P4MoonRenderer.draw(P4MoonTransform);
+		P4MoonRenderer.draw(P4MoonTransform, camera);
 		//////////////////////////////////////////////////////////////////
 		Planet5Motor.update(Planet5Rbody);
 		Planet5Rbody.integrate(Planet5Transform, deltaTime);
-		Planet5Renderer.draw(Planet5Transform);
+		Planet5Renderer.draw(Planet5Transform, camera);
 
-		P5MoonRenderer.draw(P5MoonTransform);*/
+		P5MoonRenderer.draw(P5MoonTransform, camera);
 		//////////////////////////////////////////////////////////////////
 
 
