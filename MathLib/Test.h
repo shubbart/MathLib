@@ -32,8 +32,8 @@ float inner(const Point3D &P1, const Point3D &P2);
 
 // problem f.
 // Point-Plane Distance....
-struct Plane { Point3D abc; float d; };
-float point_plane_distance(const Plane &pl, const Point3D &pt);
+//struct Plane { Point3D abc; float d; };
+//float point_plane_distance(const Plane &pl, const Point3D &pt);
 
 // problem g.
 // Bezier Curve....*/

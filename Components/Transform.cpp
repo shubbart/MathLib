@@ -1,5 +1,7 @@
 #include "Transform.h"
 #include "sfwdraw.h"
+#include "drawShape.h"
+#include "Shapes.h"
 
 Transform::Transform(float x, float y, float w, float h, float a)
 {
@@ -75,9 +77,9 @@ mat3 Transform::camera()
 void Transform::debugDraw(const mat3 &T) const
 {
 
-	/*mat3 L = T * getGlobalTransform();
+	mat3 L = T * getGlobalTransform();
 
-	vec3 pos = L[2];
+	/*vec3 pos = L[2];
 	vec3 sgp = m_parent ? T * m_parent->getGlobalTransform()[2] : pos;
 
 	vec3 right = L * vec3{ 1, 0,   1 };
@@ -87,7 +89,7 @@ void Transform::debugDraw(const mat3 &T) const
 	//sfw::drawLine(pos.x, pos.y, up.x, up.y, GREEN);
 	//sfw::drawLine(sgp.x, sgp.y, pos.x, pos.y, 0x888888FF);
 
-	sfw::drawCircle(pos.x, pos.y, 20, 12, WHITE);*/
+	sfw::drawCircle(pos.x, pos.y, 20, 12, WHITE);
 
 	/*sfw::drawCircle(pos.x, pos.y, 30, 12U, BLUE);
 	sfw::drawCircle(pos.x, pos.y, 28, 12U, BLUE);
@@ -104,4 +106,7 @@ void Transform::debugDraw(const mat3 &T) const
 	sfw::drawCircle(pos.x, pos.y, 6, 12U, YELLOW);
 	sfw::drawCircle(pos.x, pos.y, 4, 12U, YELLOW);
 	sfw::drawCircle(pos.x, pos.y, 2, 12U, YELLOW);*/
+
+	drawCircle(L * Circle{ 0,0, 2 }, MAGENTA);
+	drawAABB(L * AABB{ 0,0,10,10 }, 0x888888FF);
 }

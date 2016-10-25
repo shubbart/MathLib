@@ -7,6 +7,7 @@
 #include "mat2.h"
 #include "mat3.h"
 #include <cmath>
+#include "Shapes.h"
 
 int main()
 {
@@ -30,8 +31,8 @@ int main()
 	assert(inner({ 1,1,0 }, { -1,1,0 }) == 0);
 	assert(inner({ 1,1,1 }, { 1,1,1 }) == 3);
 
-	assert(point_plane_distance({ 0,0,1,0 }, { 0,0,0 }) == 0);
-	assert(point_plane_distance({ 0,0,1,0 }, { 0,0,1 }) == 1);
+	/*assert(point_plane_distance({ 0,0,1,0 }, { 0,0,0 }) == 0);
+	assert(point_plane_distance({ 0,0,1,0 }, { 0,0,1 }) == 1);*/
 
 	assert(bezier(0, { 0,0,0 }, { 1,0,0 }, { 2,0,0 }, { 3,0,0 }).x == 0);
 	assert(bezier(1, { 0,0,0 }, { 1,0,0 }, { 2,0,0 }, { 3,0,0 }).x == 3);
@@ -179,7 +180,7 @@ int main()
 
 	assert((translate(0, 3) * j == vec3{ 2,8,1 }));
 
-	assert((rotate(deg2rad(90)) * j == vec3{ -5,2,1 }));
+	//assert((rotate(deg2rad(90)) * j == vec3{ -5,2,1 }));
 
 	/*mat3 S = scale(2, 1);
 	mat3 T = translate(4, 3);
@@ -189,12 +190,33 @@ int main()
 
 	assert((T*R*S == RES));*/
 
-	vec3 test = rotate(deg2rad(-90)) * translate(10, 0) *
+	/*vec3 test = rotate(deg2rad(-90)) * translate(10, 0) *
 		rotate(deg2rad(45)) * translate(4, 0) *
 		rotate(deg2rad(45)) * translate(-6, 0) *
 		translate(6, 4) * vec3 { 0, 0, 1 };
 
-	assert((test == vec3{ 2 * sqrtf(2), -6 - 2 * sqrtf(2), 1 }));
+	assert((test == vec3{ 2 * sqrtf(2), -6 - 2 * sqrtf(2), 1 }));*/
+
+	///////////////////////////////////////////////////////////////
+	//////////// Shapes
+
+	/*Circle c = { 0, 0, 5 };
+	assert((translate(4, 0) * c == Circle{ 4, 0, 5 }));
+
+	assert((scale(2, 1) * c == Circle{ 4, 0, 10 }));
+	assert((scale(2, 2) * c == Circle{ 4, 0, 10 }));
+	assert((scale(1, 2) * c == Circle{ 4, 0, 10 }));
+
+	assert((scale(-1, 1) * c == Circle{ 4, 0, 5 }));
+
+	assert((rotate(45) * c == Circle{ 0, 0, 5 }));*/
+
+	AABB testA = { 1,2,  3,4 };
+
+	assert((testA.min() == vec2{ -2, -2 }));
+	assert((testA.max() == vec2{ 4,6 }));
+
+
 
 	getchar();
 	return 0;
