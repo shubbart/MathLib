@@ -16,6 +16,7 @@
 #include "Camera.h"
 #include "Shapes.h"
 #include "drawShape.h"
+#include "Collision.h"
 
 void main()
 {

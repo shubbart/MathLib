@@ -1,5 +1,7 @@
 #include "drawShape.h"
 #include "sfwdraw.h"
+#include "mat3.h"
+
 
 void drawCircle(const Circle & c, unsigned color)
 {
@@ -16,3 +18,5 @@ void drawAABB(const AABB & B, unsigned color)
 	sfw::drawLine(m1.x, m1.y, m1.x, m2.y, color);
 	sfw::drawLine(m1.x, m2.y, m2.x, m2.y, color);
 }
+
+

@@ -1,3 +1,4 @@
+
 #pragma once
 #include "mat3.h"
 
@@ -11,19 +12,19 @@ struct  Circle
 Circle operator*(const mat3 &T, const Circle &C);
 bool operator==(const Circle &A, const Circle &B);
 
-struct AABB 
+struct AABB
 {
 	vec2 pos;
 	vec2 he;	// half-extents
-					// x = half-width
-					// y = half-height
+				// x = half-width
+				// y = half-height
 	vec2 min() const;
 	vec2 max() const;
 };
 
 AABB operator*(const mat3 &T, const AABB &B);
 
-struct Plane 
+struct Plane
 {
 
 };
@@ -33,7 +34,7 @@ struct Ray
 
 };
 
-struct Hull 
+struct Hull
 {
 
 };
