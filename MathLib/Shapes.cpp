@@ -71,3 +71,55 @@ AABB operator*(const mat3 & T, const AABB & B)
 
 	return retval;
 }
+
+Plane operator*(const mat3 & T, const Plane & P)
+{
+	Plane retval;
+	retval.pos = (T * vec3{ P.pos.x, P.pos.y, 1 }).xy;
+
+	retval.dir = normal(T * vec3{ P.dir.x, P.dir.y, 0 }).xy;
+
+	return retval;
+}
+
+bool operator==(const Plane & A, const Plane & B)
+{
+	return A.pos == B.pos && A.dir == B.dir;
+}
+
+
+Hull::Hull(const vec2 * a_vertices, unsigned a_size)
+{
+	size = a_size;
+	for (int i = 0; i < a_size; ++i)
+	{
+		vertices[i] = a_vertices[i];
+		if (i + 1 >= a_size)
+			normals[i] = perp(normal(a_vertices[i] - a_vertices[0]));
+		else
+		normals[i] = perp(normal(a_vertices[i] - a_vertices[i + 1]));
+	}
+
+}
+
+Hull::Hull()
+{
+}
+
+Hull operator*(const mat3 & T, const Hull & H)
+{
+	Hull retval;
+	retval.size = H.size;
+	for (int i = 0; i < H.size; ++i)
+	{
+		retval.vertices[i] = (T * vec3{ H.vertices[i].x,  H.vertices[i].y, 1 }).xy;
+		retval.normals[i] = (T * vec3{ H.normals[i].x,  H.normals[i].y, 0 }).xy;
+	}
+
+	return retval;
+}
+
+bool operator==(const Hull & A, const Hull & B)
+{
+	return A == B;
+}

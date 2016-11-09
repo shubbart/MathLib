@@ -232,6 +232,59 @@ int main()
 	assert((boxCollision(A, B).collisionNormal == vec2{ 1, 0 }));
 	assert((boxCollision(B, A).collisionNormal == vec2{ -1, 0 }));
 
+	AABB As = { 0,0, 1,1 };
+	AABB Bs = { 0,10, 1,1 };
+
+	assert(fequals(boxCollisionSwept(As, vec2{ 0,1 }, Bs, vec2{ 0, -1 }).entryTime, 4));
+	assert(fequals(boxCollisionSwept(As, vec2{ 0,-1 }, Bs, vec2{ 0, 1 }).entryTime, -6));
+	assert(fequals(boxCollisionSwept(As, vec2{ 0,-1 }, Bs, vec2{ 0, 1 }).exitTime, -4));
+
+
+	AABB Bp = { 0,0,  4,4 };
+
+	Plane P1 = { 0,0,0,1 };
+	Plane P2 = { 0,-10,0,1 };
+	Plane P3 = { 0,10,0,1 };
+
+	Plane P4 = { vec2{6,6}, normal(vec2{-1,1}) };
+	Plane P5 = { vec2{ 6,6 }, normal(vec2{ -1,-1 }) };
+
+	assert(planeBoxCollision(P1, Bp).result());
+	assert(!planeBoxCollision(P2, Bp).result());
+	assert(planeBoxCollision(P3, Bp).result());
+	assert(planeBoxCollision(P4, Bp).result());
+	assert(!planeBoxCollision(P5, Bp).result());
+
+	Plane P6 = { 10,0,-1,0 };
+
+	assert(fequals(planeBoxCollisionSwept(P6, vec2{ 0,0 },Bp, vec2{ 1,0 }).entryTime,6.f));
+
+	vec2 verts[] = { {0,1},{1,1},{1,0},{0,0} };
+	vec2 verts2[] = { {-1,-1}, {-1,1},{0,0} };
+
+	Hull myHull(verts, 4);
+	Hull otherHull(verts2, 3);
+
+	assert((myHull.normals[0] == vec2{ 0,1 }));
+	assert((myHull.normals[1] == vec2{ 1,0 }));
+	assert((myHull.normals[2] == vec2{ 0,-1 }));
+	assert((myHull.normals[3] == vec2{ -1,0 }));
+
+	assert((myHull.vertices[0] == vec2{ 0,1 }));
+	assert((myHull.vertices[1] == vec2{ 1,1 }));
+	assert((myHull.vertices[2] == vec2{ 1,0 }));
+	assert((myHull.vertices[3] == vec2{ 0,0 }));
+
+	Hull tHull = translate(1, 0) * myHull;
+
+	assert((tHull.vertices[0] == vec2{ 1,1 }));
+	assert((tHull.vertices[1] == vec2{ 2,1 }));
+	assert((tHull.vertices[2] == vec2{ 2,0 }));
+	assert((tHull.vertices[3] == vec2{ 1,0 }));
+
+	assert(fequals(hullCollision(myHull, otherHull).penetrationDepth, 0));
+	assert(fequals(hullCollision(otherHull, tHull).penetrationDepth, -1));
+
 	getchar();
 	return 0;
 }

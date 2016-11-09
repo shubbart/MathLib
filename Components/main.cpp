@@ -46,7 +46,7 @@ void main()
 	sunTransform.m_position = vec2{ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 };
 	Rigidbody sunRbody;
 	PlanetaryMotor sunMotor;
-	sunMotor.m_rotationSpeed = 1;
+	sunMotor.m_rotationSpeed = 0.5f;
 	PlanetaryRenderer sunRenderer(YELLOW, 100);
 	//////////////////////////////////////////////////////////////////
 	Transform Planet1Transform;
@@ -208,7 +208,6 @@ void main()
 
 		P5MoonRenderer.draw(P5MoonTransform, camera);
 		//////////////////////////////////////////////////////////////////
-
 
 	}
 
