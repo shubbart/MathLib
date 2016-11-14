@@ -104,7 +104,7 @@ Hull::Hull(const vec2 * a_vertices, unsigned a_size)
 
 Hull::Hull()
 {
-}
+	size = 0;}
 
 Hull operator*(const mat3 & T, const Hull & H)
 {

@@ -17,6 +17,7 @@
 #include "Shapes.h"
 #include "drawShape.h"
 #include "Collision.h"
+#include "Collider.h"
 
 void main()
 {
@@ -46,7 +47,7 @@ void main()
 	sunTransform.m_position = vec2{ SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 };
 	Rigidbody sunRbody;
 	PlanetaryMotor sunMotor;
-	sunMotor.m_rotationSpeed = 0.5f;
+	sunMotor.m_rotationSpeed = 0.25f;
 	PlanetaryRenderer sunRenderer(YELLOW, 100);
 	//////////////////////////////////////////////////////////////////
 	Transform Planet1Transform;
@@ -128,6 +129,9 @@ void main()
 
 	Transform cameraTransform;
 
+	vec2 hullVrts[] = { {0,2},{-1,-2},{1,-2} };
+	Collider playerCollider(hullVrts, 3);
+
 	while (sfw::stepContext())
 	{
 		float deltaTime = sfw::getDeltaTime();
@@ -167,6 +171,7 @@ void main()
 		playerRenderer.shipDraw(playerTransform, camera);
 		//playerRigidbody.debugDraw(playerTransform);
 		playerTransform.debugDraw(camera);
+		playerCollider.DebugDraw(camera, playerTransform);
 
 	
 		sunMotor.update(sunRbody);
@@ -208,6 +213,7 @@ void main()
 
 		P5MoonRenderer.draw(P5MoonTransform, camera);
 		//////////////////////////////////////////////////////////////////
+
 
 	}
 

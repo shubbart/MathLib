@@ -107,8 +107,9 @@ void Transform::debugDraw(const mat3 &T) const
 	sfw::drawCircle(pos.x, pos.y, 4, 12U, YELLOW);
 	sfw::drawCircle(pos.x, pos.y, 2, 12U, YELLOW);*/
 
-	drawCircle(L * Circle{ 0,0, 2 }, MAGENTA);
+	/*drawCircle(L * Circle{ 0,0, 2 }, MAGENTA);
 	drawAABB(L * AABB{ 0,0,1,2 }, 0x888888FF);
 	drawPlane(L * Plane{ 0,0,2,1 }, GREEN);
-	drawPlane(L * Plane{ 0,0,-2,1 }, GREEN);
+	drawPlane(L * Plane{ 0,0,-2,1 }, GREEN);*/
+	
 }

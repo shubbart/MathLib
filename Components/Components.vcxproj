@@ -127,6 +127,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="Collider.cpp" />
     <ClCompile Include="drawShape.cpp" />
     <ClCompile Include="main.cpp">
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)MathLib\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -143,6 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="Collider.h" />
     <ClInclude Include="drawShape.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="PlanetaryMotor.h" />
