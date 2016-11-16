@@ -4,5 +4,10 @@
 class Camera
 {
 public:
-	mat3 camera(Transform playerTrans);
+	mat3 projection;
+	Transform transform;
+
+	Camera();
+	mat3 getCameraMatrix() const;
+	void update(float deltaTime, class GameState &gs);
 };

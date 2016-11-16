@@ -1,6 +1,7 @@
 #include "SpaceshipController.h"
 #include "sfwdraw.h"
 
+
 SpaceshipController::SpaceshipController(char a_CTR_LEFT, char a_CTR_RIGHT, char a_CTR_UP, char a_CTR_DOWN, char a_CTR_BREAK)
 {
 	CTR_LEFT = a_CTR_LEFT;

@@ -285,6 +285,19 @@ int main()
 	assert(fequals(hullCollision(myHull, otherHull).penetrationDepth, 0));
 	assert(fequals(hullCollision(otherHull, tHull).penetrationDepth, -1));
 
+	///////////////////////////////////////////////////////////////
+	/////////////// vec2 Collisions
+
+	vec2 I = vec2{ -1,-1 };
+	vec2 Ref = vec2{ 1,-1 };
+	vec2 xaxis = vec2{ 1,0 };
+
+	assert(project(I,xaxis) == -xaxis);
+
+	vec2 ttt = reflect(I, xaxis);
+
+	assert(reflect(I, xaxis) == Ref);
+
 	getchar();
 	return 0;
 }

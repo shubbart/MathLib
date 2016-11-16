@@ -178,3 +178,13 @@ vec2 max(const vec2 &A, const vec2 &B)
 	return vec2{ A.x > B.x ? A.x : B.x,
 		A.y > B.y ? A.y : B.y };
 }
+
+vec2 project(const vec2 & I, const vec2 & N)
+{
+	return dotProd(I, normal(N)) * normal(N);
+}
+
+vec2 reflect(const vec2 I, const vec2 & N)
+{
+	return I - 2 * project(I,N);
+}

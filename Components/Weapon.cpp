@@ -1,13 +1,42 @@
 #include "Weapon.h"
 #include "sfwdraw.h"
 
-void Shoot(const Circle &c, unsigned color)
+
+Weapon::Weapon()
 {
+	timer = 0;
 
-	Circle bullet = c;
+	vec2 hullVrts[] = { { -1,0 },{ 0,1 },{ 1,0 },{ 0,-1 } };
+	collider = Collider(hullVrts, 4);
 
-	if (sfw::getKey(KEY_ENTER))
-	{
-		drawCircle(bullet, color);
-	}
+	transform.m_scale = vec2{ 2,2 };
+	rigidbody.drag = 0.0f;
+	rigidbody.angularDrag = 0.0f;
+	rigidbody.mass = 5;
+
+	isAlive = false;
+	damage = 25;
+
+}
+
+void Weapon::update(float deltaTime, GameState & gs)
+{
+	timer -= deltaTime;
+	isAlive = timer > 0;
+
+	if (!isAlive) return;
+
+	rigidbody.integrate(transform, deltaTime);
+
+}
+
+void Weapon::draw(const mat3 & camera)
+{
+	if (!isAlive) return;
+	
+	transform.debugDraw(camera);
+	//collider.DebugDraw(camera, transform);
+	render.draw(transform, camera);
+	rigidbody.debugDraw(transform, camera);
+	
 }

@@ -2,22 +2,20 @@
 #include "Transform.h"
 #include "Collider.h"
 #include "RigidBody.h"
-#include "WeaponRender.h"
+#include "AsteroidRender.h"
 
-class Weapon
+class Asteroid
 {
 public:
 	Transform transform;
 	Collider collider;
 	Rigidbody rigidbody;
-	WeaponRender render;
+	AsteroidRender render;
 
-	float timer;
+	int health;
 	bool isAlive;
-	int damage;
+	Asteroid();
 
-	Weapon();
-	
 	void update(float deltaTime, class GameState &gs);
 	void draw(const mat3 &camera);
 };

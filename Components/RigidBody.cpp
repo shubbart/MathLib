@@ -41,12 +41,12 @@ void Rigidbody::integrate(Transform &trans, float deltaTime)
 	torque = -angularVelocity * angularDrag;
 }
 
-void Rigidbody::debugDraw(const Transform & trans)
+void Rigidbody::debugDraw(const Transform & trans, const mat3 &T)
 {
 	vec2 p = trans.m_position;
 	vec2 v = p + velocity;
 	vec2 a = acceleration + p;
 
-	sfw::drawLine(p.x, p.y, v.x, v.y, CYAN);
-	sfw::drawLine(p.x, p.y, a.x, a.y, MAGENTA);
+	//sfw::drawLine(p.x, p.y, v.x, v.y, CYAN);
+	//sfw::drawLine(p.x, p.y, a.x, a.y, MAGENTA);
 }

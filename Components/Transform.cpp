@@ -74,6 +74,7 @@ mat3 Transform::camera()
 	return mat3();
 }
 
+
 void Transform::debugDraw(const mat3 &T) const
 {
 
