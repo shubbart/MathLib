@@ -1,5 +1,4 @@
 #pragma once
-#include "GameState.h"
 #include "Asteroid.h"
 #include "Transform.h"
 #include "RigidBody.h"
