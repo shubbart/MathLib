@@ -1,6 +1,7 @@
 #include "Collider.h"
 #include "drawShape.h"
 #include <cmath>
+#include "sfwdraw.h"
 
 Collider::Collider()
 {
@@ -25,8 +26,8 @@ Collider::Collider(const vec2 * verts, int size) : hull(verts,size)
 void Collider::DebugDraw(const mat3 & T, const Transform & trans)
 {
 	mat3 glob = T * trans.getGlobalTransform();
-	drawAABB(glob * box, 0x888888ff);
-	drawHull(glob * hull, 0x888888ff);
+	//drawAABB(glob * box, 0x888888ff);
+	drawHull(glob * hull, GREEN);
 }
 
 CollisionData ColliderCollision(const Transform & AT, const Collider & AC, const Transform & BT, const Collider & BC)

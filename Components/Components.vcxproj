@@ -146,6 +146,7 @@
     <ClCompile Include="SpaceshipController.cpp" />
     <ClCompile Include="SpaceshipLocomotion.cpp" />
     <ClCompile Include="SpaceshipRenderer.cpp" />
+    <ClCompile Include="Tractor.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Weapon.cpp" />
     <ClCompile Include="WeaponRender.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="SpaceshipLocomotion.h" />
     <ClInclude Include="SpaceshipRenderer.h" />
     <ClInclude Include="Tank.h" />
+    <ClInclude Include="Tractor.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Weapon.h" />
     <ClInclude Include="WeaponRender.h" />

@@ -1,12 +1,15 @@
 #pragma once
 #include "Transform.h"
+#include "Asteroid.h"
+#include "PlayerShip.h"
 
 class NavRender
 {
 public:
 
-	NavRender(unsigned a_color = 0xfffffffff, float a_size = 2.f);
+	PlayerShip player;
 
+	NavRender(unsigned a_color = 0xfffffffff, float a_size = 2.f);
 	unsigned int color;
 	float size;
 

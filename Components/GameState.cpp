@@ -38,6 +38,7 @@ void GameState::update(float deltaTime)
 		player.update(deltaTime, *this);
 		camera.update(deltaTime, *this);
 		weapon.update(deltaTime, *this);
+		tractor.update(deltaTime, *this);
 
 		for (int i = 0; i < 4; ++i)
 			asteroid[i].update(deltaTime, *this);
@@ -52,16 +53,17 @@ void GameState::update(float deltaTime)
 		for (int i = 0; i < 4 - 1; ++i)
 			for (int j = i + 1; j < 4; ++j)
 				AsteroidCollision(asteroid[i], asteroid[j]);
-
 		for (int i = 0; i < 4; ++i)
 			WeaponAsteroidCollision(weapon, asteroid[i]);
+
+		for (int i = 0; i < 4; ++i)
+			TractorAsteroidCollision(tractor, asteroid[i], player);
 		
 		if (player.health <= 0)
 		{
-			player.transform.m_scale *= 0.0f;
+			!player.isAlive;
 			printf("You have died!\n");
 		}
-
 }
 
 void GameState::draw()
@@ -69,6 +71,7 @@ void GameState::draw()
 	mat3 cam = camera.getCameraMatrix();
 	player.draw(cam);
 	weapon.draw(cam);
+	tractor.draw(cam);
 		
 	for (int i = 0; i < 4; ++i)
 	{
@@ -77,7 +80,6 @@ void GameState::draw()
 			asteroid[i].draw(cam);
 			navigate.draw(cam, navigate.pointers);
 		}
-
 	}
 
 

@@ -4,6 +4,7 @@
 #include "Weapon.h"
 #include "Asteroid.h"
 #include "Navigation.h"
+#include "Tractor.h"
 
 class GameState
 {
@@ -13,6 +14,7 @@ public:
 	Camera camera;
 	Asteroid asteroid[4];
 	Weapon weapon;
+	Tractor tractor;
 	Navigation navigate;
 
 	void play();

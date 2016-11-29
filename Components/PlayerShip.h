@@ -19,8 +19,7 @@ public:
 	int health = 100;
 	bool isAlive;
 	
-	char CTR_SHOOT;
-	PlayerShip(char CTR_SHOOT = 'F');
+	PlayerShip();
 
 	void update(float deltaTime, class GameState &gs);
 	void draw(const mat3 &camera);

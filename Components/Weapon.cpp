@@ -15,7 +15,7 @@ Weapon::Weapon()
 	rigidbody.mass = 5;
 
 	isAlive = false;
-	damage = 25;
+	damage = 100;
 
 }
 

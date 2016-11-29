@@ -1,13 +1,14 @@
 #include "PlayerShip.h"
 #include "GameState.h"
+#include <cstdio>
 
 
-PlayerShip::PlayerShip(char a_CTR_SHOOT)
+PlayerShip::PlayerShip()
 {
 	vec2 hullVrts[] = { { 0,2 },{ -1,-2 },{ 1,-2 } };
 	collider = Collider(hullVrts, 3);
 	transform.m_scale = vec2{ 5,5 };
-	CTR_SHOOT = a_CTR_SHOOT;
+
 }
 
 void PlayerShip::update(float deltaTime, GameState & gs)
@@ -16,7 +17,7 @@ void PlayerShip::update(float deltaTime, GameState & gs)
 	locomotion.update(transform, rigidbody);
 	rigidbody.integrate(transform, deltaTime);
 
-	if (sfw::getKey(CTR_SHOOT) && !gs.weapon.isAlive)
+	if (sfw::getMouseButton(MOUSE_BUTTON_LEFT) && !gs.weapon.isAlive)
 	{
 		// bring it to life
 		gs.weapon.timer = 2.f;
@@ -30,6 +31,17 @@ void PlayerShip::update(float deltaTime, GameState & gs)
 		// get it moving
 		gs.weapon.rigidbody.addImpulse(transform.getUp() * 3000.f);
 	}
+
+	if (sfw::getMouseButton(MOUSE_BUTTON_RIGHT))
+	{
+		gs.tractor.isAlive = true; // reset the beam
+		gs.tractor.oneFrame = false;
+		// have it look where we are looking
+		gs.tractor.transform.m_position = transform.m_position;
+		gs.tractor.transform.m_facing = transform.m_facing;
+	}
+
+
 }
 
 void PlayerShip::draw(const mat3 &camera)

@@ -3,6 +3,7 @@
 #include "Transform.h"
 #include "RigidBody.h"
 #include "NavRender.h"
+#include "PlayerShip.h"
 
 class Navigation
 {
@@ -12,7 +13,9 @@ public:
 	Collider collider;
 	Rigidbody rigidbody;
 	NavRender render;
-	
+	Asteroid asteroid;
+	PlayerShip player;
+		
 	Navigation();
 	vec3 pointers[4];
 	Asteroid count[4];

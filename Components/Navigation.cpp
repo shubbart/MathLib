@@ -6,7 +6,7 @@
 
 Navigation::Navigation()
 {
-	transform.m_scale = vec2{ 10,10 };
+	transform.m_scale = vec2{ 1,1 };
 }
 
 void Navigation::update(float deltaTime, GameState &gs, const Asteroid asteroid[])
@@ -22,7 +22,6 @@ void Navigation::update(float deltaTime, GameState &gs, const Asteroid asteroid[
 
 void Navigation::draw(const mat3 & camera, vec3 pointers[])
 {
-	transform.debugDraw(camera);
 	render.color = MAGENTA;
 	render.draw(transform, camera, pointers);
 }

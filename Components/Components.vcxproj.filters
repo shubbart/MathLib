@@ -81,6 +81,9 @@
     <ClCompile Include="NavRender.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
+    <ClCompile Include="Tractor.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -144,6 +147,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NavRender.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Tractor.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
