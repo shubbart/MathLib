@@ -1,10 +1,14 @@
 #include <cstdio>
 #include "GameState.h"
+#include <ctime>
+#include <iostream>
 
 void main()
 {
-	float SCREEN_WIDTH = 1500;
-	float SCREEN_HEIGHT = 1000;
+	srand(time(NULL));
+
+	float SCREEN_WIDTH = 1300;
+	float SCREEN_HEIGHT = 900;
 	sfw::initContext(SCREEN_WIDTH, SCREEN_HEIGHT);
 	sfw::setBackgroundColor(BLACK);
 

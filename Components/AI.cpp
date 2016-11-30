@@ -10,11 +10,15 @@ AI::AI()
 	vec2 hullVrts[] = { { 0,2 },{ -1,-2 },{ 1,-2 } };
 	collider = Collider(hullVrts, 3);
 	transform.m_scale = vec2{ 5,5 };
+	isAlive = true;
 
 }
 
-void AI::update(SpaceshipLocomotion & loco, GameState & gs)
+void AI::update(SpaceshipLocomotion & loco, GameState & gs, float deltatime)
 {
+	locomotion.update(transform, rigidbody);
+	rigidbody.integrate(transform, deltatime);
+
 	float hInput = 0.0f;
 	hInput -= RIGHT;
 	hInput += LEFT;
@@ -45,7 +49,7 @@ void AI::update(SpaceshipLocomotion & loco, GameState & gs)
 		!gs.aiWeapon.isAlive)
 	{
 		// bring it to life
-		gs.aiWeapon.timer = 0.5f;
+		gs.aiWeapon.timer = 1.f;
 
 		// set up it's position and stuff
 		gs.aiWeapon.transform.m_position = transform.m_position;
@@ -56,6 +60,9 @@ void AI::update(SpaceshipLocomotion & loco, GameState & gs)
 		// get it moving
 		gs.aiWeapon.rigidbody.addImpulse(transform.getUp() * 3000.f);
 	}
+
+		if (health <= 0)
+			isAlive = false;
 }
 
 void AI::draw(const mat3 & camera)
@@ -75,7 +82,6 @@ void AI::locate(Transform & Player, Transform & AItrans)
 
 	float angleTurn = angleBetween(FindVec, AItrans.getDirection());
 	angleTurn = rad2deg(angleTurn);
-	printf("%f \n", angleTurn);
 	if (angleTurn <= 90 && angleTurn > 0) LEFT = 1;
 	if (angleTurn >= 90 && angleTurn < 180) RIGHT = 1;
 	if (angleTurn < 80 && angleTurn > 100)

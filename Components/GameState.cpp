@@ -2,30 +2,32 @@
 #include "ObjectCollision.h"
 #include <cstdio>
 #include <ctime>
+#include <cstdlib>
+#include <string>
 
 
 void GameState::play()
 {
+	text = sfw::loadTextureMap("./Resources/textmap.png", 16, 16);
+
 	player.transform.m_position = vec2{ 750, 500 };
 	player.transform.m_facing = 0;
-	player.isAlive = true;
-
-	ai.transform.m_position = vec2{ 800, 550 };
-	ai.transform.m_facing = 0;
-	ai.isAlive = true;
-	
-	//int asPos = rng.RandNum(-1000, 1000);
-	//int asImpulse = rng.RandNum(-7000, 7000);
 
 	for (int i = 0; i < asCount; ++i)
 	{
-		asPosX[i] = rng.RandNum(200, 800);
-		asPosY[i] = rng.RandNum(200, 800);
+		asPosX[i] = rng.RandNum(-500, 1200);
+		asPosY[i] = rng.RandNum(-500, 1200);
 		asImpulseX[i] = rng.RandNum(-7000, 7000);
 		asImpulseY[i] = rng.RandNum(-7000, 7000);
 		asteroid[i].transform.m_position = vec2{ asPosX[i],asPosY[i] };
 		asteroid[i].rigidbody.addImpulse(vec2{ asImpulseX[i] ,asImpulseY[i] });
-		asteroid[i].isAlive = true;
+		}
+
+	for (int i = 0; i < aiCount; ++i)
+	{
+		aiPosX[i] = rng.RandNum(200, 1400);
+		aiPosY[i] = rng.RandNum(100, 1400);
+		ai[i].transform.m_position = vec2{ aiPosX[i],aiPosY[i] };
 	}
 
 	weapon.timer = 0;
@@ -34,14 +36,14 @@ void GameState::play()
 
 void GameState::update(float deltaTime)
 {
+	if (player.isAlive == true)
+	{
 		player.update(deltaTime, *this);
-		camera.update(deltaTime, *this);
 		weapon.update(deltaTime, *this);
 		tractor.update(deltaTime, *this);
-		ai.locate(player.transform, ai.transform);
-		ai.locomotion.update(ai.transform, ai.rigidbody);
-		ai.update(ai.locomotion, *this);
-		ai.rigidbody.integrate(ai.transform, deltaTime);
+	}
+
+		camera.update(deltaTime, *this);
 		aiWeapon.update(deltaTime, *this);
 
 		for (int i = 0; i < asCount; ++i)
@@ -58,30 +60,62 @@ void GameState::update(float deltaTime)
 
 		for (int i = 0; i < asCount; ++i)
 			TractorAsteroidCollision(tractor, asteroid[i], player);
+
+		//AI
+		for (int i = 0; i < aiCount; ++i)
+			if(ai[i].isAlive == true)
+			ai[i].update(ai[i].locomotion, *this, deltaTime);
+
+		for (int i = 0; i < aiCount; ++i)
+			if (ai[i].isAlive == true)
+				ai[i].locate(player.transform, ai[i].transform);
+
+		for (int i = 0; i < aiCount; ++i)
+			if (ai[i].isAlive == true)
+		ai[i].locomotion.update(ai[i].transform, ai[i].rigidbody);
 		
-		if (player.health <= 0)
-		{
-			!player.isAlive;
-			printf("You have died!\n");
-		}
+		//AI Combat
+		for (int i = 0; i < aiCount; ++i)
+			if (ai[i].isAlive == true)
+				if (player.isAlive == true)
+			PlayerAICollision(player, ai[i]);
+
+		for (int i = 0; i < asCount; ++i)
+			for (int j = 0; j < aiCount; ++j)
+				if (ai[j].isAlive == true)
+			AIAsteroidCollision(ai[j], asteroid[i]);
+
+		for (int i = 0; i < aiCount; ++i)
+			if (ai[i].isAlive == true)
+				if (player.isAlive == true)
+			WeaponAICollision(weapon, ai[i]);
+
+		for (int i = 0; i < aiCount; ++i)
+			if (ai[i].isAlive == true)
+				if (player.isAlive == true)
+			AIWeaponCollision(player, aiWeapon);
 }
 
 void GameState::draw()
 {
 	mat3 cam = camera.getCameraMatrix();
-	player.draw(cam);
-	weapon.draw(cam);
-	tractor.draw(cam);
-	ai.draw(cam);
-	aiWeapon.draw(cam);
 
-	for (int i = 0; i < asCount; ++i)
+	if (player.isAlive == true)
 	{
-		if (asteroid[i].isAlive = true)
-		{
-			asteroid[i].draw(cam);
-		}
+		player.draw(cam);
+		weapon.draw(cam);
+		tractor.draw(cam);
 	}
 
+	for (int i = 0; i < aiCount; ++i)
+		if (ai[i].isAlive == true)
+		{
+			ai[i].draw(cam);
+			if (player.isAlive == true)
+			aiWeapon.draw(cam);
+		}
 
+	for (int i = 0; i < asCount; ++i)
+		if (asteroid[i].isAlive = true)
+			asteroid[i].draw(cam);
 }

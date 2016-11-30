@@ -163,6 +163,7 @@
     <ClInclude Include="Collider.h" />
     <ClInclude Include="drawShape.h" />
     <ClInclude Include="GameState.h" />
+    <ClInclude Include="Health.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="ObjectCollision.h" />
     <ClInclude Include="PlanetaryMotor.h" />

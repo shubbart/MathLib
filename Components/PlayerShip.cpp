@@ -8,6 +8,7 @@ PlayerShip::PlayerShip()
 	vec2 hullVrts[] = { { 0,2 },{ -1,-2 },{ 1,-2 } };
 	collider = Collider(hullVrts, 3);
 	transform.m_scale = vec2{ 5,5 };
+	isAlive = true;
 
 }
 
@@ -40,6 +41,9 @@ void PlayerShip::update(float deltaTime, GameState & gs)
 		gs.tractor.transform.m_position = transform.m_position;
 		gs.tractor.transform.m_facing = transform.m_facing;
 	}
+
+	if (health <= 0)
+		isAlive = false;
 
 }
 

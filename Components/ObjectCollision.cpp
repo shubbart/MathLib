@@ -11,7 +11,7 @@ void PlayerAsteroidCollision(PlayerShip & player, Asteroid & as)
 	if (result.penetrationDepth >= 0 && as.health > 0)
 	{
 		// Some sort of negative feedback for colliding
-		player.health -= 100;
+		player.health -= 300;
 	}
 
 }
@@ -67,7 +67,7 @@ void TractorAsteroidCollision(Tractor & tractor, Asteroid & asteroid, PlayerShip
 		vec2 dir = normal(tractor.transform.getGlobalPosition() -
 			asteroid.transform.getGlobalPosition());
 		// and add a force to pull the objet toward us.
-		asteroid.rigidbody.addForce(dir * 15000);
+		asteroid.rigidbody.addForce(dir * 10000);
 
 		if (stick.penetrationDepth >= 0)
 		{
@@ -81,21 +81,18 @@ void TractorAsteroidCollision(Tractor & tractor, Asteroid & asteroid, PlayerShip
 
 		if(sfw::getKey('F'))
 			asteroid.rigidbody.addForce(dir * -55000);
-
-		printf("%f\n", stick.penetrationDepth);
 	}
 }
 
 void PlayerAICollision(PlayerShip & player, AI & ai)
 {
 	CollisionData result =
-		DynamicResolution(player.transform, player.rigidbody, player.collider,
-			ai.transform, ai.rigidbody, ai.collider);
+		ColliderCollision(player.transform, player.collider,
+			ai.transform, ai.collider);
 
-	if (result.penetrationDepth >= 0 && ai.health > 0)
+	if (result.penetrationDepth >= 0)
 	{
-		// Some sort of negative feedback for colliding
-		player.health -= 100;
+		player.health -= 300;
 		ai.health -= 100;
 	}
 }
@@ -103,20 +100,45 @@ void PlayerAICollision(PlayerShip & player, AI & ai)
 void AIAsteroidCollision(AI & ai, Asteroid & asteroid)
 {
 	CollisionData result =
-		DynamicResolution(ai.transform, ai.rigidbody, ai.collider,
-			asteroid.transform, asteroid.rigidbody, asteroid.collider);
+		ColliderCollision(ai.transform, ai.collider,
+			asteroid.transform, asteroid.collider);
 
 	if (result.penetrationDepth >= 0 && asteroid.health <= 0)
 	{
-		// Some sort of negative feedback for colliding
 		ai.health -= 100;
 	}
 }
 
 void WeaponAICollision(Weapon & w, AI & ai)
 {
+	if (!w.isAlive) return;
+
+	CollisionData result =
+		ColliderCollision(w.transform, w.collider,
+			ai.transform, ai.collider);
+
+
+	if (result.penetrationDepth >= 0)
+	{
+		ai.health = ai.health - w.damage;
+		w.timer = 0;
+	}
 }
 
-void WeaponAICollision(AIWeapon & aiW, PlayerShip & player)
+void AIWeaponCollision(PlayerShip & player, AIWeapon & aiW)
 {
+	if (!aiW.isAlive) return;
+
+	CollisionData result =
+		ColliderCollision(player.transform, player.collider,
+			aiW.transform, aiW.collider);
+
+
+	if (result.penetrationDepth >= 0)
+	{
+		player.health = player.health - aiW.damage;
+		aiW.timer = 0;
+		//player.render.color = WHITE;
+		//player.render.color = 192192192;
+	}
 }

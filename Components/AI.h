@@ -20,7 +20,7 @@ public:
 
 	AI();
 
-	void update(SpaceshipLocomotion & loco, GameState & gs);
+	void update(SpaceshipLocomotion & loco, class GameState & gs, float deltatime);
 	void draw(const mat3 &camera);
 
 	int RIGHT = 0;

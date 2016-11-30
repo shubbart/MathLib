@@ -16,7 +16,8 @@ public:
 	SpaceshipLocomotion locomotion;
 	SpaceshipRenderer render;
 
-	int health = 100;
+	int health = 300;
+	int tFuel = 100;
 	bool isAlive;
 	
 	PlayerShip();

@@ -81,13 +81,13 @@
     <ClCompile Include="RNG.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="AI.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="AIRender.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="AIWeapon.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="AI.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
@@ -155,13 +155,16 @@
     <ClInclude Include="RNG.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="AI.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="AIRender.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
+    <ClInclude Include="AI.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
     <ClInclude Include="AIWeapon.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Health.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

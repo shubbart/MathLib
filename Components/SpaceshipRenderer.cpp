@@ -36,6 +36,7 @@ void SpaceshipRenderer::shipDraw(Transform & spaceshipTrans, const mat3 &camera)
 	sfw::drawLine(p7.x, p7.y, p5.x, p5.y, CYAN);
 
 	// Foward boost
+
 	vec3 fBoost1 = L *  vec3{ 0,-3,1 };
 	vec3 fBoost2 = L *  vec3{ -0.5f,-2,1 };
 	vec3 fBoost3 = L *  vec3{ 0.5f,-2,1 };
@@ -48,4 +49,5 @@ void SpaceshipRenderer::shipDraw(Transform & spaceshipTrans, const mat3 &camera)
 		sfw::drawLine(fBoost4.x, fBoost4.y, fBoost3.x, fBoost3.y, RED);
 		sfw::drawLine(fBoost3.x, fBoost3.y, fBoost1.x, fBoost1.y, RED);
 	}
+	
 }

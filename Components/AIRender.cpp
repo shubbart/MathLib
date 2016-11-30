@@ -1,5 +1,6 @@
 #include "AIRender.h"
 #include "sfwdraw.h"
+#include "AI.h"
 
 AIRender::AIRender(unsigned a_color, float a_size)
 {
@@ -40,8 +41,10 @@ void AIRender::AIDraw(Transform & spaceshipTrans, const mat3 & camera)
 	vec3 fBoost2 = L *  vec3{ -0.5f,-2,1 };
 	vec3 fBoost3 = L *  vec3{ 0.5f,-2,1 };
 	vec3 fBoost4 = L *  vec3{ 0,-1,1 };
+	
+	AI enemy;
 
-	if (sfw::getKey('W'))
+	if (enemy.FORWARD == 1 && enemy.STOP != 1)
 	{
 		sfw::drawLine(fBoost1.x, fBoost1.y, fBoost2.x, fBoost2.y, RED);
 		sfw::drawLine(fBoost2.x, fBoost2.y, fBoost4.x, fBoost4.y, RED);

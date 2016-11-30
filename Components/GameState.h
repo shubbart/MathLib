@@ -18,14 +18,21 @@ public:
 	Weapon weapon;
 	Tractor tractor;
 	RNG rng;
-	AI ai;
+	AI ai[3];
 	AIWeapon aiWeapon;
 	
-	float asCount = rng.RandNum(1, 10);
-	float asPosX[150];
-	float asPosY[150];
-	float asImpulseX[150];
-	float asImpulseY[150];
+	float asCount = rng.RandNum(20, 60);
+	float asPosX[60];
+	float asPosY[60];
+	float asImpulseX[60];
+	float asImpulseY[60];
+
+	float aiCount = rng.RandNum(1, 3);
+	float aiPosX[3];
+	float aiPosY[3];
+
+	unsigned text;
+
 	void play();
 	void update(float deltaTime);
 	void draw();
