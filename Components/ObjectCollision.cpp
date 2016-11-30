@@ -73,7 +73,7 @@ void TractorAsteroidCollision(Tractor & tractor, Asteroid & asteroid, PlayerShip
 		{
 			asteroid.rigidbody.velocity = vec2{ 0,0 };
 			asteroid.rigidbody.force = vec2{ 0,0 };
-			asteroid.rigidbody.mass = 10;
+			//asteroid.rigidbody.mass = 10;
 			//asteroid.transform = player.transform;
 			//asteroid.transform.m_position = player.transform.m_position + vec2{ 0, 10.0f };
 

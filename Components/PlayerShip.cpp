@@ -20,7 +20,7 @@ void PlayerShip::update(float deltaTime, GameState & gs)
 	if (sfw::getMouseButton(MOUSE_BUTTON_LEFT) && !gs.weapon.isAlive)
 	{
 		// bring it to life
-		gs.weapon.timer = 2.f;
+		gs.weapon.timer = 0.5f;
 
 		// set up it's position and stuff
 		gs.weapon.transform.m_position = transform.m_position;
@@ -41,13 +41,11 @@ void PlayerShip::update(float deltaTime, GameState & gs)
 		gs.tractor.transform.m_facing = transform.m_facing;
 	}
 
-
 }
 
 void PlayerShip::draw(const mat3 &camera)
 {
 	transform.debugDraw(camera);
-	//collider.DebugDraw(camera, transform);
 	render.color = 192192192;
 	render.shipDraw(transform, camera);
 }

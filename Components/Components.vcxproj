@@ -126,6 +126,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AI.cpp" />
+    <ClCompile Include="AIRender.cpp" />
+    <ClCompile Include="AIWeapon.cpp" />
     <ClCompile Include="Asteroid.cpp" />
     <ClCompile Include="AsteroidRender.cpp" />
     <ClCompile Include="Camera.cpp" />
@@ -136,13 +139,12 @@
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(SolutionDir)MathLib\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(SolutionDir)MathLib\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
-    <ClCompile Include="Navigation.cpp" />
-    <ClCompile Include="NavRender.cpp" />
     <ClCompile Include="ObjectCollision.cpp" />
     <ClCompile Include="PlanetaryMotor.cpp" />
     <ClCompile Include="PlanetaryRenderer.cpp" />
     <ClCompile Include="PlayerShip.cpp" />
     <ClCompile Include="RigidBody.cpp" />
+    <ClCompile Include="RNG.cpp" />
     <ClCompile Include="SpaceshipController.cpp" />
     <ClCompile Include="SpaceshipLocomotion.cpp" />
     <ClCompile Include="SpaceshipRenderer.cpp" />
@@ -152,6 +154,9 @@
     <ClCompile Include="WeaponRender.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AI.h" />
+    <ClInclude Include="AIRender.h" />
+    <ClInclude Include="AIWeapon.h" />
     <ClInclude Include="Asteroid.h" />
     <ClInclude Include="AsteroidRender.h" />
     <ClInclude Include="Camera.h" />
@@ -159,13 +164,12 @@
     <ClInclude Include="drawShape.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="main.h" />
-    <ClInclude Include="Navigation.h" />
-    <ClInclude Include="NavRender.h" />
     <ClInclude Include="ObjectCollision.h" />
     <ClInclude Include="PlanetaryMotor.h" />
     <ClInclude Include="PlanetaryRenderer.h" />
     <ClInclude Include="PlayerShip.h" />
     <ClInclude Include="RigidBody.h" />
+    <ClInclude Include="RNG.h" />
     <ClInclude Include="SpaceshipController.h" />
     <ClInclude Include="SpaceshipLocomotion.h" />
     <ClInclude Include="SpaceshipRenderer.h" />

@@ -11,7 +11,7 @@ Asteroid::Asteroid()
 	rigidbody.angularDrag = 0.0f;
 	rigidbody.mass = 250;
 
-	health = 100;
+	health = 60;
 
 }
 

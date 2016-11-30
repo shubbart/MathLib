@@ -1,36 +1,56 @@
 #include "GameState.h"
 #include "ObjectCollision.h"
 #include <cstdio>
+#include <ctime>
 
 
 void GameState::play()
 {
-	player.transform.m_position = vec2{ 600, 600 };
+	player.transform.m_position = vec2{ 750, 500 };
 	player.transform.m_facing = 0;
 	player.isAlive = true;
+
+	ai.transform.m_position = vec2{ 800, 550 };
+	ai.transform.m_facing = 0;
+	ai.isAlive = true;
 	
-	asteroid[0].transform.m_position = vec2{ 520,620 };
+	
+	
+	//int asPos = rng.RandNum(-1000, 1000);
+	//int asImpulse = rng.RandNum(-7000, 7000);
+
+	for (int i = 0; i < asCount; ++i)
+	{
+		asPosX[i] = rng.RandNum(200, 800);
+		asPosY[i] = rng.RandNum(200, 800);
+		asImpulseX[i] = rng.RandNum(-7000, 7000);
+		asImpulseY[i] = rng.RandNum(-7000, 7000);
+		asteroid[i].transform.m_position = vec2{ asPosX[i],asPosY[i] };
+		asteroid[i].rigidbody.addImpulse(vec2{ asImpulseX[i] ,asImpulseY[i] });
+		asteroid[i].isAlive = true;
+	}
+
+
+
+	/*asteroid[0].transform.m_position = vec2{ 520,620 };
 	asteroid[0].rigidbody.addImpulse(vec2{ 6200, 7500 });
-	asteroid[0].rigidbody.addTorque(24);
 	asteroid[0].isAlive = true;
 
 
 	asteroid[1].transform.m_position = vec2{700,650 };
 	asteroid[1].rigidbody.addImpulse(vec2{ -6500, -6000 });
-	asteroid[1].rigidbody.addTorque(-24);
 	asteroid[1].isAlive = true;
 
 	asteroid[2].transform.m_position = vec2{ 800,500 };
 	asteroid[2].rigidbody.addImpulse(vec2{ -6200, 5500 });
-	asteroid[2].rigidbody.addTorque(-24);
 	asteroid[2].isAlive = true;
 
 	asteroid[3].transform.m_position = vec2{ 530,850 };
 	asteroid[3].rigidbody.addImpulse(vec2{ 5500, -7000 });
-	asteroid[3].rigidbody.addTorque(24);
-	asteroid[3].isAlive = true;
+	asteroid[3].isAlive = true;*/
 
 	weapon.timer = 0;
+	aiWeapon.timer = 0;
 }
 
 void GameState::update(float deltaTime)
@@ -39,24 +59,25 @@ void GameState::update(float deltaTime)
 		camera.update(deltaTime, *this);
 		weapon.update(deltaTime, *this);
 		tractor.update(deltaTime, *this);
+		ai.locate(player.transform, ai.transform);
+		ai.locomotion.update(ai.transform, ai.rigidbody);
+		ai.update(ai.locomotion, *this);
+		ai.rigidbody.integrate(ai.transform, deltaTime);
+		aiWeapon.update(deltaTime, *this);
 
-		for (int i = 0; i < 4; ++i)
+		for (int i = 0; i < asCount; ++i)
 			asteroid[i].update(deltaTime, *this);
 
-		for (int i = 0; i < 4; ++i)
-			navigate.update(deltaTime, *this, asteroid);
-
-
-		for (int i = 0; i < 4; ++i)
+		for (int i = 0; i < asCount; ++i)
 			PlayerAsteroidCollision(player, asteroid[i]);
 
-		for (int i = 0; i < 4 - 1; ++i)
-			for (int j = i + 1; j < 4; ++j)
+		for (int i = 0; i < asCount - 1; ++i)
+			for (int j = i + 1; j < asCount; ++j)
 				AsteroidCollision(asteroid[i], asteroid[j]);
-		for (int i = 0; i < 4; ++i)
+		for (int i = 0; i < asCount; ++i)
 			WeaponAsteroidCollision(weapon, asteroid[i]);
 
-		for (int i = 0; i < 4; ++i)
+		for (int i = 0; i < asCount; ++i)
 			TractorAsteroidCollision(tractor, asteroid[i], player);
 		
 		if (player.health <= 0)
@@ -72,13 +93,14 @@ void GameState::draw()
 	player.draw(cam);
 	weapon.draw(cam);
 	tractor.draw(cam);
-		
-	for (int i = 0; i < 4; ++i)
+	ai.draw(cam);
+	aiWeapon.draw(cam);
+
+	for (int i = 0; i < asCount; ++i)
 	{
 		if (asteroid[i].isAlive = true)
 		{
 			asteroid[i].draw(cam);
-			navigate.draw(cam, navigate.pointers);
 		}
 	}
 

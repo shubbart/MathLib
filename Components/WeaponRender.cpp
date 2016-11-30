@@ -13,6 +13,9 @@ void WeaponRender::draw(Transform & weaponTrans, const mat3 & camera)
 
 	vec3 pos = L[2];
 
-	sfw::drawCircle(pos.x +10, pos.y, size, 12U, RED);
-	sfw::drawCircle(pos.x -10, pos.y, size, 12U, RED);
+	sfw::drawCircle(pos.x, pos.y, size, 12U, color);
+	sfw::drawCircle(pos.x, pos.y, size - 1, 12U, color);
+	sfw::drawCircle(pos.x, pos.y, size - 2, 12U, color);
+	sfw::drawCircle(pos.x, pos.y, size - 3, 12U, color);
+	sfw::drawCircle(pos.x, pos.y, size - 4, 12U, color);
 }
