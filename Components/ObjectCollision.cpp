@@ -85,3 +85,38 @@ void TractorAsteroidCollision(Tractor & tractor, Asteroid & asteroid, PlayerShip
 		printf("%f\n", stick.penetrationDepth);
 	}
 }
+
+void PlayerAICollision(PlayerShip & player, AI & ai)
+{
+	CollisionData result =
+		DynamicResolution(player.transform, player.rigidbody, player.collider,
+			ai.transform, ai.rigidbody, ai.collider);
+
+	if (result.penetrationDepth >= 0 && ai.health > 0)
+	{
+		// Some sort of negative feedback for colliding
+		player.health -= 100;
+		ai.health -= 100;
+	}
+}
+
+void AIAsteroidCollision(AI & ai, Asteroid & asteroid)
+{
+	CollisionData result =
+		DynamicResolution(ai.transform, ai.rigidbody, ai.collider,
+			asteroid.transform, asteroid.rigidbody, asteroid.collider);
+
+	if (result.penetrationDepth >= 0 && asteroid.health <= 0)
+	{
+		// Some sort of negative feedback for colliding
+		ai.health -= 100;
+	}
+}
+
+void WeaponAICollision(Weapon & w, AI & ai)
+{
+}
+
+void WeaponAICollision(AIWeapon & aiW, PlayerShip & player)
+{
+}

@@ -14,8 +14,6 @@ void GameState::play()
 	ai.transform.m_facing = 0;
 	ai.isAlive = true;
 	
-	
-	
 	//int asPos = rng.RandNum(-1000, 1000);
 	//int asImpulse = rng.RandNum(-7000, 7000);
 
@@ -29,25 +27,6 @@ void GameState::play()
 		asteroid[i].rigidbody.addImpulse(vec2{ asImpulseX[i] ,asImpulseY[i] });
 		asteroid[i].isAlive = true;
 	}
-
-
-
-	/*asteroid[0].transform.m_position = vec2{ 520,620 };
-	asteroid[0].rigidbody.addImpulse(vec2{ 6200, 7500 });
-	asteroid[0].isAlive = true;
-
-
-	asteroid[1].transform.m_position = vec2{700,650 };
-	asteroid[1].rigidbody.addImpulse(vec2{ -6500, -6000 });
-	asteroid[1].isAlive = true;
-
-	asteroid[2].transform.m_position = vec2{ 800,500 };
-	asteroid[2].rigidbody.addImpulse(vec2{ -6200, 5500 });
-	asteroid[2].isAlive = true;
-
-	asteroid[3].transform.m_position = vec2{ 530,850 };
-	asteroid[3].rigidbody.addImpulse(vec2{ 5500, -7000 });
-	asteroid[3].isAlive = true;*/
 
 	weapon.timer = 0;
 	aiWeapon.timer = 0;

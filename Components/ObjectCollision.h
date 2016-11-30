@@ -20,4 +20,6 @@ void PlayerAICollision(PlayerShip &player, AI &ai);
 
 void AIAsteroidCollision(AI &ai, Asteroid &asteroid);
 
-void WeaponAsteroidCollision(AIWeapon &b, Asteroid &a);
+void WeaponAICollision(Weapon & w, AI & ai);
+
+void WeaponAICollision(AIWeapon & aiW, PlayerShip & player);
